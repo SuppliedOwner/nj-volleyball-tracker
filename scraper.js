@@ -4,10 +4,14 @@ const fs = require('fs');
 async function scrape() {
   console.log("||PAUSE...|| Initializing Siphon...");
   
-  // Launching the browser using the built-in Chrome on the server
-const browser = await puppeteer.launch({ 
-            // This is the EXACT path for Windows
-            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 
+// Detect if we are on Linux (GitHub) or Windows (Your PC)
+        const isLinux = process.platform === 'linux';
+        
+        const browser = await puppeteer.launch({ 
+            // Use the Linux path on GitHub, and the Windows path on your PC
+            executablePath: isLinux 
+                ? '/usr/bin/google-chrome' 
+                : 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 
             headless: "new",
             args: ['--no-sandbox', '--disable-setuid-sandbox'] 
         });
