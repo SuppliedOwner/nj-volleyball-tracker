@@ -3,202 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJVB HUB | Live Rankings</title>
+    <title>NJVB | Central Intelligence Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0a0c10; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; }
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .active-nav { background: rgba(147, 51, 234, 0.1); color: #c084fc; border-right: 3px solid #9333ea; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="text-slate-200 font-sans selection:bg-purple-500/30 min-h-screen">
+<body class="min-h-screen overflow-hidden">
 
-    <header class="sticky top-0 z-50 bg-[#0f1116]/90 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="setTab('home')">
-                <i data-lucide="activity" class="w-5 h-5 text-purple-500"></i>
-                <span class="text-lg font-black tracking-tighter uppercase">NJVB<span class="text-purple-500">HUB</span></span>
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="w-80 glass-panel border-r border-white/5 flex flex-col shrink-0 hidden lg:flex">
+            <div class="p-8 border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-purple-600 rounded-2xl shadow-2xl shadow-purple-900/40">
+                        <i data-lucide="zap" class="w-6 h-6 text-white fill-white/20"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-black tracking-tighter uppercase italic leading-none">NJVB<span class="text-purple-500">HUB</span></h1>
+                        <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">State Intelligence</p>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center gap-1 bg-slate-900/50 p-1 rounded-lg border border-white/5">
-                <button onclick="setTab('home')" id="nav-home" class="nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg"><i data-lucide="home" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Home</span></button>
-                <button onclick="setTab('rankings')" id="nav-rankings" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Rankings</span></button>
-                <button onclick="setTab('matches')" id="nav-matches" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Matches</span></button>
-            </div>
-        </div>
-    </header>
 
-    <main id="app-content" class="max-w-6xl mx-auto px-4 py-6 pb-24 space-y-10">
+            <nav class="flex-1 p-6 space-y-1.5">
+                <button onclick="setTab('home')" id="nav-home" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5 active-nav">
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i> Dashboard
+                </button>
+                <button onclick="setTab('rankings')" id="nav-rankings" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
+                    <i data-lucide="list-ordered" class="w-4 h-4"></i> Power Rankings
+                </button>
+                <button onclick="setTab('stats')" id="nav-stats" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Stat Leaders
+                </button>
+                <button onclick="setTab('matches')" id="nav-matches" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> Game Center
+                </button>
+            </nav>
+
+            <div class="p-6 border-t border-white/5 space-y-4">
+                <div class="p-4 rounded-2xl bg-slate-900/40 border border-white/5">
+                    <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest">Global Status</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-[10px] font-bold text-slate-300 italic uppercase" id="sync-label">Syncing Live...</span>
+                    </div>
+                </div>
+                <button class="w-full py-4 bg-slate-900 border border-white/10 rounded-2xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all text-slate-300">
+                    <i data-lucide="plus" class="w-3 h-3 text-purple-500"></i> Verify Match
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col min-w-0">
+            <header class="h-24 border-b border-white/5 flex items-center justify-between px-10 shrink-0 bg-[#020617]/50 backdrop-blur-md">
+                <div class="flex flex-col">
+                    <p id="rotating-msg" class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.15em] transition-opacity duration-500">
+                        Initializing Garden State Intelligence...
+                    </p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex flex-col text-right">
+                        <span class="text-[10px] font-black text-slate-500 uppercase">Database Alpha</span>
+                        <span id="header-sync" class="text-[10px] font-bold text-purple-400 uppercase">...</span>
+                    </div>
+                    <div class="h-10 w-px bg-white/5"></div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/20 flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-purple-500"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div id="content-body" class="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar space-y-10">
+                </div>
         </main>
+    </div>
 
     <script>
-        // REPLACE THIS WITH YOUR ACTUAL GITHUB RAW URL
         const DATA_URL = 'https://raw.githubusercontent.com/SuppliedOwner/nj-volleyball-tracker/main/data.json';
-        
-        let globalData = { teams: [], matches: [], lastUpdated: '' };
+        const MESSAGES = [
+            "NJ's elite platform for strength-of-schedule analytics.",
+            "Track every set, kill, and block across the state.",
+            "Advanced SOS algorithms for verified state rankings.",
+            "Live intelligence sourced from state-wide databases."
+        ];
+
+        let db = { teams: [], playerStats: {kills:[], aces:[], blocks:[]}, matches: [], lastUpdated: '' };
         let currentTab = 'home';
+        let msgIdx = 0;
 
-        // 1. Fetch the Scraped Data
-        async function fetchScrapedData() {
+        async function init() {
             try {
-                document.getElementById('app-content').innerHTML = `<div class="text-center py-20 text-slate-500 italic animate-pulse">Siphoning live data...</div>`;
-                const response = await fetch(DATA_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
-                globalData = await response.json();
+                const res = await fetch(DATA_URL);
+                db = await res.json();
+                document.getElementById('header-sync').innerText = db.lastUpdated || 'Live';
                 render();
-            } catch (error) {
-                console.error("Failed to load data:", error);
-                document.getElementById('app-content').innerHTML = `
-                    <div class="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
-                        <i data-lucide="shield-alert" class="w-10 h-10 mx-auto mb-4"></i>
-                        <h2 class="text-lg font-black uppercase">Data Sync Failed</h2>
-                        <p class="text-sm mt-2">Could not connect to GitHub database. Ensure data.json exists and is pushed.</p>
-                    </div>`;
-                lucide.createIcons();
-            }
+                startMessenger();
+            } catch (e) { console.error("Database connection failed."); }
         }
 
-        // 2. Tab Navigation
-        window.setTab = function(tabName) {
-            currentTab = tabName;
-            
-            // Update button styles
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.className = "nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all";
-            });
-            const activeBtn = document.getElementById(`nav-${tabName}`);
-            if(activeBtn) {
-                activeBtn.className = "nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg";
-            }
-            render();
+        function startMessenger() {
+            setInterval(() => {
+                msgIdx = (msgIdx + 1) % MESSAGES.length;
+                const el = document.getElementById('rotating-msg');
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.innerText = MESSAGES[msgIdx];
+                    el.style.opacity = 1;
+                }, 500);
+            }, 15000);
         }
 
-        // 3. Render Views
+        function setTab(t) { currentTab = t; render(); }
+
         function render() {
-            const content = document.getElementById('app-content');
-            
+            const body = document.getElementById('content-body');
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-nav'));
+            document.getElementById(`nav-${currentTab}`).classList.add('active-nav');
+
             if (currentTab === 'home') {
-                content.innerHTML = `
-                    <section class="relative p-10 md:p-16 rounded-3xl border border-white/5 overflow-hidden bg-gradient-to-br from-[#1a1525] via-[#111318] to-[#0a0c10]">
-                        <div class="absolute top-0 right-0 w-1/2 h-full bg-purple-600/5 blur-[120px] rounded-full -translate-y-1/2"></div>
-                        <div class="relative z-10">
-                            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase italic leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">
-                                THE STATE <br/><span class="text-purple-500">POWER RANKINGS</span>
-                            </h1>
-                            <p class="text-slate-400 text-sm mb-8 max-w-md font-medium">NJ's elite platform for strength-of-schedule analytics and real-time volleyball intelligence. Last updated: ${globalData.lastUpdated || 'Unknown'}</p>
-                            <div class="flex flex-wrap gap-3 mt-6">
-                                <button onclick="setTab('rankings')" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-purple-900/20">View Rankings</button>
-                                <button onclick="setTab('matches')" class="bg-slate-800/50 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border border-white/5">View Latest Matches</button>
+                body.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 p-12 rounded-[48px] bg-gradient-to-br from-purple-900/20 to-slate-900/50 border border-white/5 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 blur-[120px] rounded-full transition-all group-hover:bg-purple-500/20"></div>
+                            <div class="relative z-10">
+                                <span class="bg-purple-500/10 text-purple-400 text-[10px] font-black px-4 py-1.5 rounded-full uppercase border border-purple-500/20 tracking-[0.2em]">Live Feed Active</span>
+                                <h2 class="text-6xl md:text-8xl font-black uppercase italic tracking-tighter mt-8 leading-[0.8] transition-transform">
+                                    THE STATE <br/><span class="text-purple-500">POWER INDEX.</span>
+                                </h2>
+                                <p class="text-slate-400 mt-10 text-sm md:text-lg font-medium max-w-md leading-relaxed">
+                                    ${MESSAGES[0]}
+                                </p>
                             </div>
                         </div>
-                    </section>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
-                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
-                                <i data-lucide="trophy" class="w-4 h-4 text-yellow-500"></i> Top 3 Programs
-                            </h3>
-                            <div class="space-y-4">
-                                ${globalData.teams.slice(0, 3).map((t, i) => `
-                                    <div class="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl border border-white/5">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-lg font-black italic ${i===0 ? 'text-yellow-500' : 'text-slate-500'}">#${i+1}</span>
-                                            <span class="font-bold text-sm text-white uppercase">${t.name}</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xs font-black text-purple-400">${t.points} PTS</div>
-                                            <div class="text-[9px] text-slate-500">${t.record}</div>
-                                        </div>
-                                    </div>
-                                `).join('')}
+                        <div class="p-10 rounded-[48px] glass-panel flex flex-col justify-between border border-white/5">
+                            <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-purple-500"></i> Top Ranked Program</h3>
+                            <div class="mt-4">
+                                <div class="text-3xl font-black uppercase italic leading-tight">${db.teams[0]?.name || '---'}</div>
+                                <div class="text-[10px] font-bold text-slate-500 mt-2 uppercase tracking-widest">${db.teams[0]?.conference || 'Independent'}</div>
                             </div>
-                        </div>
-                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
-                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i> Recent Action
-                            </h3>
-                            <div class="space-y-4">
-                                ${globalData.matches.slice(0, 3).map(m => `
-                                    <div class="p-3 bg-slate-900/50 rounded-xl border border-white/5">
-                                        <div class="flex justify-between text-[9px] font-black text-slate-500 uppercase mb-2">
-                                            <span>Matchup</span>
-                                            <span class="${m.status === 'Final' ? 'text-green-500' : 'text-purple-500'}">${m.status || 'TBA'}</span>
-                                        </div>
-                                        <div class="flex justify-between font-bold text-sm text-white">
-                                            <span>${m.away}</span>
-                                            <span class="text-slate-600 mx-2">vs</span>
-                                            <span>${m.home}</span>
-                                        </div>
-                                    </div>
-                                `).join('')}
+                            <div class="mt-8 pt-8 border-t border-white/5">
+                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">SOS Performance</div>
+                                <div class="text-3xl font-black text-white italic">${db.teams[0]?.sos || '0.00'}</div>
                             </div>
                         </div>
                     </div>
-                `;
-            } 
-            else if (currentTab === 'rankings') {
-                content.innerHTML = `
-                    <div class="bg-[#0f1116] rounded-xl border border-white/5 overflow-hidden shadow-2xl">
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-900 text-[10px] font-black uppercase text-slate-500">
-                                <tr>
-                                    <th class="px-6 py-4 w-16">Rank</th>
-                                    <th class="px-6 py-4">Program</th>
-                                    <th class="px-6 py-4 text-center">Record</th>
-                                    <th class="px-6 py-4 text-right">Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-white/5">
-                                ${globalData.teams.map((t, i) => `
-                                    <tr class="hover:bg-white/5 transition-all ${i === 0 ? 'bg-yellow-500/5' : ''}">
-                                        <td class="px-6 py-4 font-black italic ${i === 0 ? 'text-yellow-500 scale-110' : 'text-slate-600'}">
-                                            ${i === 0 ? '👑' : `#${i + 1}`}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <span class="font-bold text-sm tracking-tight text-white uppercase">${t.name}</span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <span class="text-[10px] font-mono font-bold bg-slate-900 text-slate-400 px-2 py-1 rounded border border-white/5 uppercase">
-                                                ${t.record}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 font-mono font-black text-purple-500 italic text-sm text-right">
-                                            ${t.points}
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${renderSummaryCard("Active Matches", db.matches.length, "satellite", "text-blue-400")}
+                        ${renderSummaryCard("Kill Leader", db.playerStats.kills[0]?.value || 0, "flame", "text-orange-500")}
+                        ${renderSummaryCard("Aces Tracked", db.playerStats.aces[0]?.value || 0, "zap", "text-yellow-400")}
+                        ${renderSummaryCard("Blocks Noted", db.playerStats.blocks[0]?.value || 0, "shield", "text-green-400")}
                     </div>
                 `;
             }
-            else if (currentTab === 'matches') {
-                content.innerHTML = `
-                    <div class="flex justify-between items-center bg-[#0f1116] p-6 rounded-2xl border border-white/5 mb-6">
-                        <div>
-                            <h2 class="text-xl font-black uppercase italic tracking-tighter text-white">Live Game Center</h2>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Sourced from state databases</p>
+
+            if (currentTab === 'rankings') {
+                body.innerHTML = `
+                    <div class="glass-panel rounded-[40px] overflow-hidden border border-white/5">
+                        <div class="p-10 border-b border-white/5 flex flex-col md:flex-row justify-between items-end gap-4">
+                            <div>
+                                <h2 class="text-4xl font-black uppercase italic tracking-tighter">NJ Top 100 Rankings</h2>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase mt-2 tracking-widest">Strength of Schedule (SOS) Analytics</p>
+                            </div>
                         </div>
-                        <i data-lucide="satellite" class="text-purple-500 w-8 h-8 animate-pulse"></i>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-900/40 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+                                    <tr>
+                                        <th class="px-10 py-6">Rank</th>
+                                        <th class="px-10 py-6">Program / Conference</th>
+                                        <th class="px-10 py-6 text-center">Record</th>
+                                        <th class="px-10 py-6 text-right">SOS Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    ${db.teams.map(t => `
+                                        <tr class="hover:bg-white/5 transition-all group">
+                                            <td class="px-10 py-8">
+                                                <div class="flex items-center gap-4">
+                                                    <span class="text-3xl font-black italic text-slate-800 group-hover:text-purple-500 transition-colors">#${t.rank}</span>
+                                                    ${renderMove(t.movement)}
+                                                </div>
+                                            </td>
+                                            <td class="px-10 py-8">
+                                                <div class="flex items-center gap-5">
+                                                    <img src="${t.logo}" class="w-12 h-12 rounded-2xl bg-slate-900 p-2 border border-white/5 object-contain" onerror="this.src='https://ui-avatars.com/api/?name=${t.name}&background=9333ea&color=fff'">
+                                                    <div>
+                                                        <a href="${t.url}" target="_blank" class="font-black uppercase text-sm tracking-tight hover:text-purple-400 transition-colors">${t.name}</a>
+                                                        <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">${t.conference}</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-10 py-8 text-center">
+                                                <span class="px-5 py-2 bg-black/40 rounded-2xl border border-white/10 text-[10px] font-black italic tracking-widest text-slate-400">
+                                                    ${t.record.replace('-', ' — ')}
+                                                </span>
+                                            </td>
+                                            <td class="px-10 py-8 text-right font-black text-purple-400 italic text-2xl">${t.sos}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${globalData.matches.map(m => `
-                            <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-5 hover:bg-slate-900/50 transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/5 blur-3xl pointer-events-none"></div>
-                                <div class="flex justify-between items-center mb-6 relative z-10">
-                                    <span class="text-[9px] font-black uppercase text-purple-500 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/20">MaxPreps Log</span>
-                                    <span class="text-[9px] font-black uppercase ${m.status === 'Final' ? 'text-green-500' : 'text-slate-500'}">${m.status || 'TBA'}</span>
+                `;
+            }
+
+            if (currentTab === 'stats') {
+                body.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${renderStatList("Kills Leaderboard", db.playerStats.kills, "Kills")}
+                        ${renderStatList("Service Aces", db.playerStats.aces, "Aces")}
+                        ${renderStatList("Defensive Blocks", db.playerStats.blocks, "Blocks")}
+                    </div>
+                `;
+            }
+
+            if (currentTab === 'matches') {
+                body.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        ${db.matches.map(m => `
+                            <div class="glass-panel p-10 rounded-[48px] group relative overflow-hidden border border-white/5">
+                                <div class="flex justify-between items-center mb-10">
+                                    <span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">State Match Log</span>
+                                    <span class="text-[10px] font-black uppercase text-green-500 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">${m.status}</span>
                                 </div>
-                                <div class="flex justify-between items-center gap-4 relative z-10">
-                                    <div class="flex-1 text-right">
-                                        <span class="text-sm font-black text-white uppercase">${m.away}</span>
+                                <div class="space-y-8">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-black uppercase text-base truncate pr-4 text-slate-300">${m.away}</span>
+                                        <span class="text-4xl font-black italic text-purple-500">${m.awayScore}</span>
                                     </div>
-                                    <div class="px-3 py-1 bg-slate-900 rounded-lg border border-white/5 shrink-0">
-                                        <span class="text-xs font-black italic text-slate-600">VS</span>
-                                    </div>
-                                    <div class="flex-1 text-left">
-                                        <span class="text-sm font-black text-white uppercase">${m.home}</span>
+                                    <div class="h-px bg-white/5 w-full"></div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-black uppercase text-base truncate pr-4 text-white">${m.home}</span>
+                                        <span class="text-4xl font-black italic">${m.homeScore}</span>
                                     </div>
                                 </div>
                             </div>
@@ -206,13 +252,53 @@
                     </div>
                 `;
             }
-            
-            // Render the icons after injecting new HTML
             lucide.createIcons();
         }
 
-        // Initialize App
-        fetchScrapedData();
+        function renderSummaryCard(title, val, icon, color) {
+            return `
+                <div class="glass-panel p-8 rounded-[40px] border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="${icon}" class="w-4 h-4 ${color}"></i>
+                        <span class="text-[10px] font-black uppercase text-slate-500 tracking-widest">${title}</span>
+                    </div>
+                    <div class="text-3xl font-black italic uppercase">${val}</div>
+                </div>
+            `;
+        }
+
+        function renderMove(m) {
+            if (m > 0) return `<span class="text-green-500 text-[10px] font-black bg-green-500/10 px-2 py-0.5 rounded-full">▲ ${m}</span>`;
+            if (m < 0) return `<span class="text-red-500 text-[10px] font-black bg-red-500/10 px-2 py-0.5 rounded-full">▼ ${Math.abs(m)}</span>`;
+            return `<span class="text-slate-800 text-[10px] font-black">--</span>`;
+        }
+
+        function renderStatList(t, list, label) {
+            return `
+                <div class="glass-panel p-10 rounded-[48px] border border-white/5">
+                    <h3 class="text-xl font-black uppercase italic mb-10 border-b border-white/5 pb-5">${t}</h3>
+                    <div class="space-y-4">
+                        ${list.map((p, i) => `
+                            <div class="flex justify-between items-center p-5 bg-slate-900/40 rounded-3xl border border-white/5 hover:border-purple-500/20 transition-all group">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[11px] font-black text-slate-700 group-hover:text-purple-500 transition-colors">${i+1}</span>
+                                    <div>
+                                        <div class="font-black text-sm uppercase text-slate-200 truncate w-32">${p.name}</div>
+                                        <div class="text-[9px] font-bold text-slate-500 uppercase truncate w-32">${p.school}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-black italic text-purple-500 leading-none">${p.value}</div>
+                                    <div class="text-[8px] font-black text-slate-600 uppercase mt-1 tracking-widest">${label}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        init();
     </script>
 </body>
 </html>
