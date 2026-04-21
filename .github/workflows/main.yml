@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: npm install puppeteer-core
+        run: npm install puppeteer-core --no-package-lock
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
 
