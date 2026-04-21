@@ -3,202 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJVB HUB | Live Rankings</title>
+    <title>NJVB PRO | State Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0a0c10; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050608; color: #f8fafc; overflow-x: hidden; }
+        .glass { background: rgba(15, 17, 23, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.06); }
+        .hero-glow { background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 70%); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .transition-text { transition: opacity 0.5s ease-in-out; }
     </style>
 </head>
-<body class="text-slate-200 font-sans selection:bg-purple-500/30 min-h-screen">
+<body class="min-h-screen hero-glow">
 
-    <header class="sticky top-0 z-50 bg-[#0f1116]/90 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="setTab('home')">
-                <i data-lucide="activity" class="w-5 h-5 text-purple-500"></i>
-                <span class="text-lg font-black tracking-tighter uppercase">NJVB<span class="text-purple-500">HUB</span></span>
+    <header class="sticky top-0 z-[100] border-b border-white/5 bg-[#050608]/90 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 lg:px-10 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-4 cursor-pointer" onclick="setTab('home')">
+                <div class="p-2.5 bg-purple-600 rounded-2xl shadow-2xl shadow-purple-600/30">
+                    <i data-lucide="zap" class="w-7 h-7 text-white fill-white/20"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tighter uppercase italic block leading-none">NJVB<span class="text-purple-500 font-extrabold">PRO</span></span>
+                    <span class="text-[9px] font-black uppercase text-slate-500 tracking-[0.2em]">Live Intelligence</span>
+                </div>
             </div>
-            <div class="flex items-center gap-1 bg-slate-900/50 p-1 rounded-lg border border-white/5">
-                <button onclick="setTab('home')" id="nav-home" class="nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg"><i data-lucide="home" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Home</span></button>
-                <button onclick="setTab('rankings')" id="nav-rankings" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Rankings</span></button>
-                <button onclick="setTab('matches')" id="nav-matches" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Matches</span></button>
+            
+            <nav class="hidden md:flex items-center gap-2 bg-white/5 p-1.5 rounded-2xl border border-white/5">
+                <button onclick="setTab('home')" id="nav-home" class="nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Hub</button>
+                <button onclick="setTab('rankings')" id="nav-rankings" class="nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Top 100</button>
+                <button onclick="setTab('stats')" id="nav-stats" class="nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Leaderboard</button>
+                <button onclick="setTab('matches')" id="nav-matches" class="nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Game Center</button>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span id="sync-time" class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Updating...</span>
             </div>
         </div>
     </header>
 
-    <main id="app-content" class="max-w-6xl mx-auto px-4 py-6 pb-24 space-y-10">
+    <main id="app-content" class="max-w-7xl mx-auto px-4 lg:px-10 py-12 pb-32">
         </main>
 
+    <div class="md:hidden fixed bottom-6 left-6 right-6 z-[100] glass rounded-[32px] p-2 flex justify-around border border-white/10 shadow-2xl">
+        <button onclick="setTab('home')" class="p-4 text-slate-500"><i data-lucide="home"></i></button>
+        <button onclick="setTab('rankings')" class="p-4 text-slate-500"><i data-lucide="list-ordered"></i></button>
+        <button onclick="setTab('stats')" class="p-4 text-slate-500"><i data-lucide="bar-chart-3"></i></button>
+        <button onclick="setTab('matches')" class="p-4 text-slate-500"><i data-lucide="calendar"></i></button>
+    </div>
+
     <script>
-        // REPLACE THIS WITH YOUR ACTUAL GITHUB RAW URL
         const DATA_URL = 'https://raw.githubusercontent.com/SuppliedOwner/nj-volleyball-tracker/main/data.json';
+        const MESSAGES = [
+            "NJ's elite platform for strength-of-schedule analytics.",
+            "Tracking every kill, block, and ace across the state.",
+            "Advanced SOS algorithms for verified state rankings.",
+            "Real-time intelligence from High Point to Cape May."
+        ];
         
-        let globalData = { teams: [], matches: [], lastUpdated: '' };
+        let db = { teams: [], playerStats: {kills:[], aces:[], blocks:[]}, matches: [], lastUpdated: '' };
         let currentTab = 'home';
+        let msgIndex = 0;
 
-        // 1. Fetch the Scraped Data
-        async function fetchScrapedData() {
+        async function init() {
             try {
-                document.getElementById('app-content').innerHTML = `<div class="text-center py-20 text-slate-500 italic animate-pulse">Siphoning live data...</div>`;
-                const response = await fetch(DATA_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
-                globalData = await response.json();
+                const res = await fetch(DATA_URL);
+                db = await res.json();
+                document.getElementById('sync-time').innerText = `Sync: ${db.lastUpdated}`;
                 render();
-            } catch (error) {
-                console.error("Failed to load data:", error);
-                document.getElementById('app-content').innerHTML = `
-                    <div class="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
-                        <i data-lucide="shield-alert" class="w-10 h-10 mx-auto mb-4"></i>
-                        <h2 class="text-lg font-black uppercase">Data Sync Failed</h2>
-                        <p class="text-sm mt-2">Could not connect to GitHub database. Ensure data.json exists and is pushed.</p>
-                    </div>`;
-                lucide.createIcons();
-            }
+            } catch (e) { console.error("Database Link Failed."); }
         }
 
-        // 2. Tab Navigation
-        window.setTab = function(tabName) {
-            currentTab = tabName;
-            
-            // Update button styles
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.className = "nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all";
-            });
-            const activeBtn = document.getElementById(`nav-${tabName}`);
-            if(activeBtn) {
-                activeBtn.className = "nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg";
+        // ROTATING TEXT
+        setInterval(() => {
+            msgIndex = (msgIndex + 1) % MESSAGES.length;
+            const el = document.getElementById('rotating-text');
+            if(el) {
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.innerText = MESSAGES[msgIndex] + " | " + db.lastUpdated;
+                    el.style.opacity = 1;
+                }, 500);
             }
-            render();
-        }
+        }, 45000);
 
-        // 3. Render Views
+        function setTab(t) { currentTab = t; render(); window.scrollTo(0,0); }
+
         function render() {
             const content = document.getElementById('app-content');
-            
+            document.querySelectorAll('.nav-btn').forEach(b => b.className = "nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase text-slate-500 hover:text-white");
+            const active = document.getElementById(`nav-${currentTab}`);
+            if(active) active.className = "nav-btn px-6 py-2.5 rounded-xl text-[10px] font-black uppercase bg-purple-600 text-white shadow-2xl shadow-purple-600/40";
+
             if (currentTab === 'home') {
                 content.innerHTML = `
-                    <section class="relative p-10 md:p-16 rounded-3xl border border-white/5 overflow-hidden bg-gradient-to-br from-[#1a1525] via-[#111318] to-[#0a0c10]">
-                        <div class="absolute top-0 right-0 w-1/2 h-full bg-purple-600/5 blur-[120px] rounded-full -translate-y-1/2"></div>
-                        <div class="relative z-10">
-                            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase italic leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">
-                                THE STATE <br/><span class="text-purple-500">POWER RANKINGS</span>
+                    <div class="space-y-16">
+                        <section class="py-20 text-center max-w-4xl mx-auto">
+                            <h1 class="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] mb-8">
+                                THE <span class="text-purple-500">GARDEN STATE</span> INDEX.
                             </h1>
-                            <p class="text-slate-400 text-sm mb-8 max-w-md font-medium">NJ's elite platform for strength-of-schedule analytics and real-time volleyball intelligence. Last updated: ${globalData.lastUpdated || 'Unknown'}</p>
-                            <div class="flex flex-wrap gap-3 mt-6">
-                                <button onclick="setTab('rankings')" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-purple-900/20">View Rankings</button>
-                                <button onclick="setTab('matches')" class="bg-slate-800/50 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border border-white/5">View Latest Matches</button>
-                            </div>
+                            <p id="rotating-text" class="text-slate-400 text-sm md:text-lg font-medium transition-text duration-500">
+                                ${MESSAGES[0]} | ${db.lastUpdated}
+                            </p>
+                        </section>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            ${renderHomeCard("State Rank #1", db.teams[0]?.name, "👑 Unrivaled")}
+                            ${renderHomeCard("Attack Leader", db.playerStats.kills[0]?.name, db.playerStats.kills[0]?.value + " TOTAL KILLS")}
+                            ${renderHomeCard("Upcoming Action", db.matches[0]?.home + " vs " + db.matches[0]?.away, "LIVE GAME CENTER")}
                         </div>
-                    </section>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
-                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
-                                <i data-lucide="trophy" class="w-4 h-4 text-yellow-500"></i> Top 3 Programs
-                            </h3>
-                            <div class="space-y-4">
-                                ${globalData.teams.slice(0, 3).map((t, i) => `
-                                    <div class="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl border border-white/5">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-lg font-black italic ${i===0 ? 'text-yellow-500' : 'text-slate-500'}">#${i+1}</span>
-                                            <span class="font-bold text-sm text-white uppercase">${t.name}</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xs font-black text-purple-400">${t.points} PTS</div>
-                                            <div class="text-[9px] text-slate-500">${t.record}</div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
-                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
-                                <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i> Recent Action
-                            </h3>
-                            <div class="space-y-4">
-                                ${globalData.matches.slice(0, 3).map(m => `
-                                    <div class="p-3 bg-slate-900/50 rounded-xl border border-white/5">
-                                        <div class="flex justify-between text-[9px] font-black text-slate-500 uppercase mb-2">
-                                            <span>Matchup</span>
-                                            <span class="${m.status === 'Final' ? 'text-green-500' : 'text-purple-500'}">${m.status || 'TBA'}</span>
-                                        </div>
-                                        <div class="flex justify-between font-bold text-sm text-white">
-                                            <span>${m.away}</span>
-                                            <span class="text-slate-600 mx-2">vs</span>
-                                            <span>${m.home}</span>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } 
-            else if (currentTab === 'rankings') {
-                content.innerHTML = `
-                    <div class="bg-[#0f1116] rounded-xl border border-white/5 overflow-hidden shadow-2xl">
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-900 text-[10px] font-black uppercase text-slate-500">
-                                <tr>
-                                    <th class="px-6 py-4 w-16">Rank</th>
-                                    <th class="px-6 py-4">Program</th>
-                                    <th class="px-6 py-4 text-center">Record</th>
-                                    <th class="px-6 py-4 text-right">Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-white/5">
-                                ${globalData.teams.map((t, i) => `
-                                    <tr class="hover:bg-white/5 transition-all ${i === 0 ? 'bg-yellow-500/5' : ''}">
-                                        <td class="px-6 py-4 font-black italic ${i === 0 ? 'text-yellow-500 scale-110' : 'text-slate-600'}">
-                                            ${i === 0 ? '👑' : `#${i + 1}`}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <span class="font-bold text-sm tracking-tight text-white uppercase">${t.name}</span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <span class="text-[10px] font-mono font-bold bg-slate-900 text-slate-400 px-2 py-1 rounded border border-white/5 uppercase">
-                                                ${t.record}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 font-mono font-black text-purple-500 italic text-sm text-right">
-                                            ${t.points}
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
                     </div>
                 `;
             }
-            else if (currentTab === 'matches') {
+
+            if (currentTab === 'rankings') {
                 content.innerHTML = `
-                    <div class="flex justify-between items-center bg-[#0f1116] p-6 rounded-2xl border border-white/5 mb-6">
-                        <div>
-                            <h2 class="text-xl font-black uppercase italic tracking-tighter text-white">Live Game Center</h2>
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Sourced from state databases</p>
+                    <div class="glass rounded-[48px] overflow-hidden shadow-2xl border border-white/5">
+                        <div class="p-10 md:p-14 border-b border-white/5 bg-white/2 flex flex-col md:flex-row justify-between items-end">
+                            <div>
+                                <h2 class="text-5xl font-black uppercase italic tracking-tighter">The NJ Top 100</h2>
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mt-3">Verified Strength of Schedule Analytics</p>
+                            </div>
                         </div>
-                        <i data-lucide="satellite" class="text-purple-500 w-8 h-8 animate-pulse"></i>
+                        <div class="overflow-x-auto no-scrollbar">
+                            <table class="w-full text-left">
+                                <thead class="bg-black/50 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                    <tr>
+                                        <th class="px-12 py-8">Position</th>
+                                        <th class="px-12 py-8">School / Conference</th>
+                                        <th class="px-12 py-8 text-center">Record</th>
+                                        <th class="px-12 py-8 text-right">SOS Index</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    ${db.teams.map(t => `
+                                        <tr class="hover:bg-white/5 transition-all group">
+                                            <td class="px-12 py-10">
+                                                <div class="flex items-center gap-6">
+                                                    <span class="text-3xl font-black italic text-slate-800 w-12 group-hover:text-purple-500 transition-colors">#${t.rank}</span>
+                                                    ${renderMovement(t.movement)}
+                                                </div>
+                                            </td>
+                                            <td class="px-12 py-10">
+                                                <div class="flex items-center gap-6">
+                                                    <img src="${t.logo}" class="w-12 h-12 rounded-2xl bg-slate-900 border border-white/10 p-1.5 object-contain" onerror="this.src='https://ui-avatars.com/api/?name=${t.name}&background=6366f1&color=fff'">
+                                                    <div>
+                                                        <a href="${t.url}" target="_blank" class="font-black uppercase text-base tracking-tight hover:text-purple-400 transition-colors">${t.name}</a>
+                                                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">${t.conference}</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-12 py-10 text-center">
+                                                <span class="px-5 py-2 rounded-2xl bg-black border border-white/10 text-xs font-black italic tracking-widest text-slate-300">
+                                                    ${t.record.split('-').join(' <span class="text-slate-600">—</span> ')}
+                                                </span>
+                                            </td>
+                                            <td class="px-12 py-10 text-right font-mono font-black text-purple-400 italic text-xl">${t.sos}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${globalData.matches.map(m => `
-                            <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-5 hover:bg-slate-900/50 transition-all group relative overflow-hidden">
-                                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/5 blur-3xl pointer-events-none"></div>
-                                <div class="flex justify-between items-center mb-6 relative z-10">
-                                    <span class="text-[9px] font-black uppercase text-purple-500 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/20">MaxPreps Log</span>
-                                    <span class="text-[9px] font-black uppercase ${m.status === 'Final' ? 'text-green-500' : 'text-slate-500'}">${m.status || 'TBA'}</span>
+                `;
+            }
+
+            if (currentTab === 'stats') {
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                        ${renderStatList("Attack / Kills", db.playerStats.kills, "KILLS")}
+                        ${renderStatList("Service / Aces", db.playerStats.aces, "ACES")}
+                        ${renderStatList("Defense / Blocks", db.playerStats.blocks, "BLOCKS")}
+                    </div>
+                `;
+            }
+
+            if (currentTab === 'matches') {
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${db.matches.map(m => `
+                            <div class="glass p-10 rounded-[40px] hover:border-purple-500/30 transition-all group relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/5 blur-3xl"></div>
+                                <div class="flex justify-between items-center mb-10 text-[10px] font-black uppercase tracking-widest">
+                                    <span class="text-slate-500 flex items-center gap-2"><i data-lucide="satellite" class="w-3 h-3"></i> Broadcast Log</span>
+                                    <span class="text-green-500 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">${m.status}</span>
                                 </div>
-                                <div class="flex justify-between items-center gap-4 relative z-10">
-                                    <div class="flex-1 text-right">
-                                        <span class="text-sm font-black text-white uppercase">${m.away}</span>
+                                <div class="space-y-8 relative z-10">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-black uppercase text-sm truncate pr-4">${m.away}</span>
+                                        <span class="font-black text-3xl italic text-purple-500">${m.awayScore}</span>
                                     </div>
-                                    <div class="px-3 py-1 bg-slate-900 rounded-lg border border-white/5 shrink-0">
-                                        <span class="text-xs font-black italic text-slate-600">VS</span>
-                                    </div>
-                                    <div class="flex-1 text-left">
-                                        <span class="text-sm font-black text-white uppercase">${m.home}</span>
+                                    <div class="h-px bg-white/5 w-full"></div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-black uppercase text-sm truncate pr-4">${m.home}</span>
+                                        <span class="font-black text-3xl italic text-white">${m.homeScore}</span>
                                     </div>
                                 </div>
                             </div>
@@ -206,13 +205,52 @@
                     </div>
                 `;
             }
-            
-            // Render the icons after injecting new HTML
             lucide.createIcons();
         }
 
-        // Initialize App
-        fetchScrapedData();
+        // --- Visual Components ---
+        function renderHomeCard(l, v, s) {
+            return `
+                <div class="glass p-12 rounded-[48px] min-h-[280px] flex flex-col justify-between border border-white/5 hover:border-purple-500/20 transition-all">
+                    <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-[0.3em]">${l}</h3>
+                    <div class="text-4xl font-black uppercase italic text-white leading-none">${v || '---'}</div>
+                    <div class="text-[11px] font-black text-purple-500 uppercase tracking-widest">${s}</div>
+                </div>
+            `;
+        }
+
+        function renderMovement(m) {
+            if (m > 0) return `<div class="flex items-center gap-1 text-green-500 font-black text-[11px] bg-green-500/10 px-2 py-0.5 rounded-full"><i data-lucide="trending-up" class="w-3 h-3"></i> ${m}</div>`;
+            if (m < 0) return `<div class="flex items-center gap-1 text-red-500 font-black text-[11px] bg-red-500/10 px-2 py-0.5 rounded-full"><i data-lucide="trending-down" class="w-3 h-3"></i> ${Math.abs(m)}</div>`;
+            return `<div class="text-slate-600 text-[10px] font-black">--</div>`;
+        }
+
+        function renderStatList(title, data, label) {
+            return `
+                <div class="glass p-10 rounded-[48px]">
+                    <h2 class="text-2xl font-black uppercase italic tracking-tighter mb-10 text-white">${title}</h2>
+                    <div class="space-y-4">
+                        ${data.map((p, i) => `
+                            <div class="flex justify-between items-center p-6 bg-black/40 rounded-[32px] border border-white/5 hover:border-purple-500/20 transition-all">
+                                <div class="flex items-center gap-5">
+                                    <span class="text-xs font-black text-slate-700">${i < 9 ? '0' : ''}${i+1}</span>
+                                    <div>
+                                        <div class="font-black text-sm uppercase text-white">${p.name}</div>
+                                        <div class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter">${p.school}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-black italic text-purple-500 leading-none">${p.value}</div>
+                                    <div class="text-[8px] font-black text-slate-600 uppercase mt-1 tracking-widest">${label}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        init();
     </script>
 </body>
 </html>
