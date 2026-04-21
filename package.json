@@ -1,0 +1,12 @@
+{
+  "name": "nj-volleyball-siphon",
+  "version": "1.0.0",
+  "description": "Automated NJ Volleyball Data Cartel",
+  "main": "scraper.js",
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "scripts": {
+    "start": "node scraper.js"
+  }
+}
