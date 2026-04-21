@@ -1,0 +1,32 @@
+name: Hourly_Data_Siphon
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Every hour on the dot
+  workflow_dispatch: # Allows you to press "Run" on your phone
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Puppeteer
+        run: npm install
+
+      - name: Run Siphon Script
+        run: node scraper.js
+
+      - name: Push Data to Repo
+        run: |
+          git config --local user.email "bot@njvb.com"
+          git config --local user.name "SiphonBot"
+          git add data.json
+          git commit -m "||PAUSE...|| Stats Updated [Automated]" || exit 0
+          git push
