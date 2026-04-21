@@ -4,7 +4,7 @@
   "description": "Automated NJ Volleyball Data Cartel",
   "main": "scraper.js",
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "puppeteer-core": "latest"
   },
   "scripts": {
     "start": "node scraper.js"
