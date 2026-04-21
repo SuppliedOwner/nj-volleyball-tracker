@@ -1,10 +1,12 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 
 async function scrape() {
   console.log("||PAUSE...|| Initializing Siphon...");
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-  const page = await browser.newPage();
+const browser = await puppeteer.launch({ 
+  executablePath: '/usr/bin/google-chrome', 
+  args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+});
   
   // 1. Get Standings/Rankings
   await page.goto('https://www.maxpreps.com/nj/volleyball/boys/rankings/1/', { waitUntil: 'domcontentloaded' });
