@@ -2,9 +2,7 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 
 async function scrape() {
-    console.log("||PAUSE...|| Initializing Original Siphon Engine...");
-    
-    // Movement Logic
+    console.log("||PAUSE...|| Initializing Original Design Siphon...");
     let oldData = { teams: [] };
     if (fs.existsSync('data.json')) {
         try { oldData = JSON.parse(fs.readFileSync('data.json', 'utf8')); } catch (e) {}
@@ -45,7 +43,7 @@ async function scrape() {
             t.movement = prev ? prev.rank - t.rank : 0;
         });
 
-        // 2. STATS
+        // 2. STATS (Kills, Aces, Blocks)
         const categories = ['kills', 'aces', 'blocks'];
         let playerStats = {};
         for (const cat of categories) {
