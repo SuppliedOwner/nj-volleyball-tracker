@@ -3,181 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJVB | Central Hub</title>
+    <title>NJVB HUB | Live Rankings</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; }
-        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .active-nav { background: rgba(147, 51, 234, 0.1); color: #c084fc; border-right: 2px solid #9333ea; }
-        .transition-all { transition: all 0.3s ease; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0a0c10; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="text-slate-200 font-sans selection:bg-purple-500/30 min-h-screen">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
-        <aside class="w-full md:w-80 glass-panel border-r border-white/5 flex flex-col shrink-0">
-            <div class="p-8 border-b border-white/5">
-                <div class="flex items-center gap-3">
-                    <div class="p-2.5 bg-purple-600 rounded-2xl shadow-xl shadow-purple-900/40">
-                        <i data-lucide="zap" class="w-6 h-6 text-white fill-white/20"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-black tracking-tighter uppercase italic">NJVB<span class="text-purple-500">HUB</span></h1>
-                        <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">State Intelligence</p>
-                    </div>
-                </div>
+    <header class="sticky top-0 z-50 bg-[#0f1116]/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="setTab('home')">
+                <i data-lucide="activity" class="w-5 h-5 text-purple-500"></i>
+                <span class="text-lg font-black tracking-tighter uppercase">NJVB<span class="text-purple-500">HUB</span></span>
             </div>
-
-            <nav class="flex-1 p-6 space-y-2">
-                <button onclick="setTab('home')" id="nav-home" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
-                    <i data-lucide="layout-grid" class="w-4 h-4"></i> Dashboard
-                </button>
-                <button onclick="setTab('rankings')" id="nav-rankings" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
-                    <i data-lucide="list-ordered" class="w-4 h-4"></i> Power Rankings
-                </button>
-                <button onclick="setTab('stats')" id="nav-stats" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
-                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Stat Leaders
-                </button>
-                <button onclick="setTab('matches')" id="nav-matches" class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all text-slate-400 hover:bg-white/5">
-                    <i data-lucide="play-circle" class="w-4 h-4"></i> Game Center
-                </button>
-            </nav>
-
-            <div class="p-6 border-t border-white/5">
-                <button class="w-full py-4 bg-slate-900 border border-white/10 rounded-2xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
-                    <i data-lucide="plus" class="w-3 h-3"></i> Verify Match
-                </button>
+            <div class="flex items-center gap-1 bg-slate-900/50 p-1 rounded-lg border border-white/5">
+                <button onclick="setTab('home')" id="nav-home" class="nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg"><i data-lucide="home" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Home</span></button>
+                <button onclick="setTab('rankings')" id="nav-rankings" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Rankings</span></button>
+                <button onclick="setTab('matches')" id="nav-matches" class="nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Matches</span></button>
             </div>
-        </aside>
+        </div>
+    </header>
 
-        <main class="flex-1 flex flex-col h-screen overflow-hidden">
-            <header class="h-24 border-b border-white/5 flex items-center justify-between px-10 shrink-0">
-                <div class="max-w-2xl">
-                    <p id="rotating-msg" class="text-[11px] font-bold text-slate-500 uppercase tracking-widest transition-opacity duration-500">
-                        Siphoning data...
-                    </p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-2 px-4 py-2 bg-slate-900/50 rounded-full border border-white/5">
-                        <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                        <span id="sync-time" class="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">Live</span>
-                    </div>
-                </div>
-            </header>
-
-            <div id="content-body" class="flex-1 overflow-y-auto p-10 space-y-10 custom-scrollbar">
-                </div>
+    <main id="app-content" class="max-w-6xl mx-auto px-4 py-6 pb-24 space-y-10">
         </main>
-    </div>
 
     <script>
+        // REPLACE THIS WITH YOUR ACTUAL GITHUB RAW URL
         const DATA_URL = 'https://raw.githubusercontent.com/SuppliedOwner/nj-volleyball-tracker/main/data.json';
-        const SHUFFLE_MESSAGES = [
-            "NJ's elite platform for strength-of-schedule analytics and real-time volleyball intelligence.",
-            "Track every set, kill, and block from High Point to Cape May in real-time.",
-            "The central hub for Garden State volleyball news and verified match reports."
-        ];
-
-        let db = { teams: [], playerStats: {kills:[], aces:[], blocks:[]}, matches: [], lastUpdated: '' };
+        
+        let globalData = { teams: [], matches: [], lastUpdated: '' };
         let currentTab = 'home';
-        let msgIdx = 0;
 
-        async function load() {
+        // 1. Fetch the Scraped Data
+        async function fetchScrapedData() {
             try {
-                const res = await fetch(DATA_URL);
-                db = await res.json();
-                document.getElementById('sync-time').innerText = `Last Sync: ${db.lastUpdated}`;
+                document.getElementById('app-content').innerHTML = `<div class="text-center py-20 text-slate-500 italic animate-pulse">Siphoning live data...</div>`;
+                const response = await fetch(DATA_URL);
+                if (!response.ok) throw new Error('Network response was not ok');
+                globalData = await response.json();
                 render();
-            } catch (e) { console.error("Sync failure"); }
+            } catch (error) {
+                console.error("Failed to load data:", error);
+                document.getElementById('app-content').innerHTML = `
+                    <div class="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
+                        <i data-lucide="shield-alert" class="w-10 h-10 mx-auto mb-4"></i>
+                        <h2 class="text-lg font-black uppercase">Data Sync Failed</h2>
+                        <p class="text-sm mt-2">Could not connect to GitHub database. Ensure data.json exists and is pushed.</p>
+                    </div>`;
+                lucide.createIcons();
+            }
         }
 
-        setInterval(() => {
-            msgIdx = (msgIdx + 1) % SHUFFLE_MESSAGES.length;
-            const el = document.getElementById('rotating-msg');
-            if(el) {
-                el.style.opacity = 0;
-                setTimeout(() => {
-                    el.innerText = SHUFFLE_MESSAGES[msgIdx];
-                    el.style.opacity = 1;
-                }, 500);
+        // 2. Tab Navigation
+        window.setTab = function(tabName) {
+            currentTab = tabName;
+            
+            // Update button styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn text-slate-400 hover:text-slate-200 hover:bg-white/5 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all";
+            });
+            const activeBtn = document.getElementById(`nav-${tabName}`);
+            if(activeBtn) {
+                activeBtn.className = "nav-btn bg-purple-600 text-white flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-black uppercase transition-all shadow-lg";
             }
-        }, 45000);
+            render();
+        }
 
-        function setTab(t) { currentTab = t; render(); }
-
+        // 3. Render Views
         function render() {
-            const body = document.getElementById('content-body');
-            document.querySelectorAll('nav button').forEach(b => b.className = b.className.replace('active-nav', ''));
-            document.getElementById(`nav-${currentTab}`).classList.add('active-nav');
-
+            const content = document.getElementById('app-content');
+            
             if (currentTab === 'home') {
-                body.innerHTML = `
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 p-12 rounded-[40px] bg-gradient-to-br from-purple-900/20 to-slate-900/50 border border-white/5 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[100px]"></div>
-                            <div class="relative z-10">
-                                <span class="bg-purple-500/10 text-purple-400 text-[10px] font-black px-4 py-1.5 rounded-full uppercase border border-purple-500/20 tracking-widest">Database Alpha</span>
-                                <h2 class="text-6xl font-black uppercase italic tracking-tighter mt-6 leading-none">The Pulse of <br/><span class="text-purple-500">NJ Volleyball.</span></h2>
-                                <p class="text-slate-400 mt-8 text-sm font-medium max-w-md">${SHUFFLE_MESSAGES[0]}</p>
+                content.innerHTML = `
+                    <section class="relative p-10 md:p-16 rounded-3xl border border-white/5 overflow-hidden bg-gradient-to-br from-[#1a1525] via-[#111318] to-[#0a0c10]">
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-purple-600/5 blur-[120px] rounded-full -translate-y-1/2"></div>
+                        <div class="relative z-10">
+                            <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase italic leading-[0.9] text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">
+                                THE STATE <br/><span class="text-purple-500">POWER RANKINGS</span>
+                            </h1>
+                            <p class="text-slate-400 text-sm mb-8 max-w-md font-medium">NJ's elite platform for strength-of-schedule analytics and real-time volleyball intelligence. Last updated: ${globalData.lastUpdated || 'Unknown'}</p>
+                            <div class="flex flex-wrap gap-3 mt-6">
+                                <button onclick="setTab('rankings')" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-purple-900/20">View Rankings</button>
+                                <button onclick="setTab('matches')" class="bg-slate-800/50 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border border-white/5">View Latest Matches</button>
                             </div>
                         </div>
-                        <div class="p-8 rounded-[40px] glass-panel flex flex-col justify-between">
-                            <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-widest flex items-center gap-2"><i data-lucide="award"></i> State #1</h3>
-                            <div class="mt-4">
-                                <div class="text-3xl font-black uppercase italic">${db.teams[0]?.name || '---'}</div>
-                                <div class="text-xs font-bold text-purple-500 mt-1 uppercase">${db.teams[0]?.conference || ''}</div>
+                    </section>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
+                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
+                                <i data-lucide="trophy" class="w-4 h-4 text-yellow-500"></i> Top 3 Programs
+                            </h3>
+                            <div class="space-y-4">
+                                ${globalData.teams.slice(0, 3).map((t, i) => `
+                                    <div class="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl border border-white/5">
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-lg font-black italic ${i===0 ? 'text-yellow-500' : 'text-slate-500'}">#${i+1}</span>
+                                            <span class="font-bold text-sm text-white uppercase">${t.name}</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-xs font-black text-purple-400">${t.points} PTS</div>
+                                            <div class="text-[9px] text-slate-500">${t.record}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
                             </div>
-                            <div class="mt-8 pt-8 border-t border-white/5">
-                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">SOS Index</div>
-                                <div class="text-2xl font-black text-white italic">${db.teams[0]?.sos || '0.00'}</div>
+                        </div>
+                        <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-6">
+                            <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
+                                <i data-lucide="flame" class="w-4 h-4 text-orange-500"></i> Recent Action
+                            </h3>
+                            <div class="space-y-4">
+                                ${globalData.matches.slice(0, 3).map(m => `
+                                    <div class="p-3 bg-slate-900/50 rounded-xl border border-white/5">
+                                        <div class="flex justify-between text-[9px] font-black text-slate-500 uppercase mb-2">
+                                            <span>Matchup</span>
+                                            <span class="${m.status === 'Final' ? 'text-green-500' : 'text-purple-500'}">${m.status || 'TBA'}</span>
+                                        </div>
+                                        <div class="flex justify-between font-bold text-sm text-white">
+                                            <span>${m.away}</span>
+                                            <span class="text-slate-600 mx-2">vs</span>
+                                            <span>${m.home}</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
                     </div>
                 `;
-            }
-
-            if (currentTab === 'rankings') {
-                body.innerHTML = `
-                    <div class="glass-panel rounded-[32px] overflow-hidden">
-                        <div class="p-8 border-b border-white/5 flex justify-between items-center bg-white/2">
-                            <h2 class="text-2xl font-black uppercase italic tracking-tighter">NJ State Top 100</h2>
-                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Verified Ratings Only</span>
-                        </div>
+            } 
+            else if (currentTab === 'rankings') {
+                content.innerHTML = `
+                    <div class="bg-[#0f1116] rounded-xl border border-white/5 overflow-hidden shadow-2xl">
                         <table class="w-full text-left">
-                            <thead class="bg-slate-900/40 text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
+                            <thead class="bg-slate-900 text-[10px] font-black uppercase text-slate-500">
                                 <tr>
-                                    <th class="px-8 py-6">Rank</th>
-                                    <th class="px-8 py-6">School / Conference</th>
-                                    <th class="px-8 py-6 text-center">Record</th>
-                                    <th class="px-8 py-6 text-right">SOS</th>
+                                    <th class="px-6 py-4 w-16">Rank</th>
+                                    <th class="px-6 py-4">Program</th>
+                                    <th class="px-6 py-4 text-center">Record</th>
+                                    <th class="px-6 py-4 text-right">Rating</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-white/5">
-                                ${db.teams.map(t => `
-                                    <tr class="hover:bg-white/5 transition-all group">
-                                        <td class="px-8 py-8">
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-2xl font-black italic text-slate-700">#${t.rank}</span>
-                                                ${renderMove(t.movement)}
-                                            </div>
+                                ${globalData.teams.map((t, i) => `
+                                    <tr class="hover:bg-white/5 transition-all ${i === 0 ? 'bg-yellow-500/5' : ''}">
+                                        <td class="px-6 py-4 font-black italic ${i === 0 ? 'text-yellow-500 scale-110' : 'text-slate-600'}">
+                                            ${i === 0 ? '👑' : `#${i + 1}`}
                                         </td>
-                                        <td class="px-8 py-8">
-                                            <div class="flex items-center gap-4">
-                                                <img src="${t.logo}" class="w-10 h-10 rounded-xl bg-slate-900 p-1 border border-white/5 object-contain" onerror="this.src='https://ui-avatars.com/api/?name=${t.name}&background=9333ea&color=fff'">
-                                                <div>
-                                                    <a href="${t.url}" target="_blank" class="font-black uppercase text-sm tracking-tight hover:text-purple-400">${t.name}</a>
-                                                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">${t.conference}</div>
-                                                </div>
-                                            </div>
+                                        <td class="px-6 py-4">
+                                            <span class="font-bold text-sm tracking-tight text-white uppercase">${t.name}</span>
                                         </td>
-                                        <td class="px-8 py-8 text-center">
-                                            <span class="px-4 py-1.5 bg-black/40 rounded-xl border border-white/10 text-[10px] font-black italic tracking-widest text-slate-400">
-                                                ${t.record.replace('-', ' — ')}
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="text-[10px] font-mono font-bold bg-slate-900 text-slate-400 px-2 py-1 rounded border border-white/5 uppercase">
+                                                ${t.record}
                                             </span>
                                         </td>
-                                        <td class="px-8 py-8 text-right font-black text-purple-400 italic text-lg">${t.sos}</td>
+                                        <td class="px-6 py-4 font-mono font-black text-purple-500 italic text-sm text-right">
+                                            ${t.points}
+                                        </td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -185,35 +173,32 @@
                     </div>
                 `;
             }
-
-            if (currentTab === 'stats') {
-                body.innerHTML = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${renderStatBox("State Kill Leaders", db.playerStats.kills, "Kills")}
-                        ${renderStatBox("Service Aces", db.playerStats.aces, "Aces")}
-                        ${renderStatBox("Defensive Blocks", db.playerStats.blocks, "Blocks")}
+            else if (currentTab === 'matches') {
+                content.innerHTML = `
+                    <div class="flex justify-between items-center bg-[#0f1116] p-6 rounded-2xl border border-white/5 mb-6">
+                        <div>
+                            <h2 class="text-xl font-black uppercase italic tracking-tighter text-white">Live Game Center</h2>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Sourced from state databases</p>
+                        </div>
+                        <i data-lucide="satellite" class="text-purple-500 w-8 h-8 animate-pulse"></i>
                     </div>
-                `;
-            }
-
-            if (currentTab === 'matches') {
-                body.innerHTML = `
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        ${db.matches.map(m => `
-                            <div class="glass-panel p-8 rounded-[32px] group relative overflow-hidden">
-                                <div class="flex justify-between items-center mb-10">
-                                    <span class="text-[9px] font-black uppercase text-slate-500">Live Match Tracker</span>
-                                    <span class="text-[9px] font-black uppercase text-green-500">${m.status}</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${globalData.matches.map(m => `
+                            <div class="bg-[#0f1116] border border-white/5 rounded-2xl p-5 hover:bg-slate-900/50 transition-all group relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/5 blur-3xl pointer-events-none"></div>
+                                <div class="flex justify-between items-center mb-6 relative z-10">
+                                    <span class="text-[9px] font-black uppercase text-purple-500 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/20">MaxPreps Log</span>
+                                    <span class="text-[9px] font-black uppercase ${m.status === 'Final' ? 'text-green-500' : 'text-slate-500'}">${m.status || 'TBA'}</span>
                                 </div>
-                                <div class="space-y-6">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-black uppercase text-sm truncate pr-4">${m.away}</span>
-                                        <span class="text-2xl font-black italic text-purple-500">${m.awayScore}</span>
+                                <div class="flex justify-between items-center gap-4 relative z-10">
+                                    <div class="flex-1 text-right">
+                                        <span class="text-sm font-black text-white uppercase">${m.away}</span>
                                     </div>
-                                    <div class="h-px bg-white/5 w-full"></div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-black uppercase text-sm truncate pr-4">${m.home}</span>
-                                        <span class="text-2xl font-black italic">${m.homeScore}</span>
+                                    <div class="px-3 py-1 bg-slate-900 rounded-lg border border-white/5 shrink-0">
+                                        <span class="text-xs font-black italic text-slate-600">VS</span>
+                                    </div>
+                                    <div class="flex-1 text-left">
+                                        <span class="text-sm font-black text-white uppercase">${m.home}</span>
                                     </div>
                                 </div>
                             </div>
@@ -221,41 +206,13 @@
                     </div>
                 `;
             }
+            
+            // Render the icons after injecting new HTML
             lucide.createIcons();
         }
 
-        function renderMove(m) {
-            if (m > 0) return `<span class="text-green-500 text-[10px] font-black">▲ ${m}</span>`;
-            if (m < 0) return `<span class="text-red-500 text-[10px] font-black">▼ ${Math.abs(m)}</span>`;
-            return `<span class="text-slate-800 text-[10px] font-black">--</span>`;
-        }
-
-        function renderStatBox(t, list, label) {
-            return `
-                <div class="glass-panel p-8 rounded-[32px]">
-                    <h3 class="text-lg font-black uppercase italic mb-8 border-b border-white/5 pb-4">${t}</h3>
-                    <div class="space-y-4">
-                        ${list.map((p, i) => `
-                            <div class="flex justify-between items-center p-4 bg-slate-900/40 rounded-2xl border border-white/5">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-[10px] font-black text-slate-700">${i+1}</span>
-                                    <div>
-                                        <div class="font-black text-xs uppercase truncate w-24">${p.name}</div>
-                                        <div class="text-[8px] font-bold text-slate-500 uppercase truncate">${p.school}</div>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <div class="text-lg font-black italic text-purple-500">${p.value}</div>
-                                    <div class="text-[8px] font-black text-slate-600 uppercase">${label}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        load();
+        // Initialize App
+        fetchScrapedData();
     </script>
 </body>
 </html>
