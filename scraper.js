@@ -5,10 +5,12 @@ async function scrape() {
   console.log("||PAUSE...|| Initializing Siphon...");
   
   // Launching the browser using the built-in Chrome on the server
-  const browser = await puppeteer.launch({ 
-    executablePath: '/usr/bin/google-chrome',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-  });
+const browser = await puppeteer.launch({ 
+            // This is the EXACT path for Windows
+            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 
+            headless: "new",
+            args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+        });
 
   // CRITICAL: This is the line that was missing or misplaced
   const page = await browser.newPage();
