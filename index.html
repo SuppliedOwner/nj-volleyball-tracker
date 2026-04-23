@@ -1,227 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJVB HUB | Elite NJ Volleyball</title>
+    <meta charset="UTF-8"><title>NJVB CARTEL | THE GOSPEL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f8fafc; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .gold-glow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.4); border: 1px solid #eab308; }
-        .modal-bg { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); }
+        body { background: #050505; color: #eee; font-family: 'Inter', sans-serif; }
+        .gold-glow { box-shadow: 0 0 15px #fbbf24; border: 2px solid #fbbf24 !important; }
+        .card-grad { background: linear-gradient(145deg, #111, #080808); }
+        .hide-scroll::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- COMPONENTS ---
-
-        const TeamModal = ({ team, onClose }) => {
-            if (!team) return null;
-            return (
-                <div className="fixed inset-0 z-50 flex items-center justify-center modal-bg p-4" onClick={onClose}>
-                    <div className="bg-[#111] border border-zinc-800 p-8 rounded-2xl w-full max-w-2xl" onClick={e => e.stopPropagation()}>
-                        <div className="flex justify-between items-start mb-6">
-                            <div>
-                                <h2 className="text-4xl font-black uppercase">{team.name}</h2>
-                                <p className="text-purple-500 font-bold tracking-widest text-sm mt-1">{team.conference} CONFERENCE | STATE RANK: #{team.rank}</p>
-                            </div>
-                            <button onClick={onClose} className="text-zinc-500 hover:text-white text-2xl">&times;</button>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="bg-[#1a1a1a] p-4 rounded-xl">
-                                <span className="text-zinc-500 text-xs font-bold uppercase">Record</span>
-                                <p className="text-2xl font-black">{team.record}</p>
-                            </div>
-                            <div className="bg-[#1a1a1a] p-4 rounded-xl">
-                                <span className="text-zinc-500 text-xs font-bold uppercase">SOS (Strength of Schedule)</span>
-                                <p className="text-2xl font-black">{team.sos || 'N/A'}</p>
-                            </div>
-                        </div>
-
-                        <div className="text-zinc-400 text-sm italic">
-                            *Roster & Schedule modules pending next siphoning cycle.*
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const MainTab = ({ matches }) => (
-            <div className="animate-fade-in">
-                <h2 className="text-3xl font-black uppercase mb-6 border-b border-zinc-800 pb-2">Recent Intelligence</h2>
-                <div className="grid gap-4">
-                    {matches.slice(0, 5).map((match, i) => (
-                        <div key={i} className="bg-[#111] border border-zinc-800 p-5 rounded-xl flex justify-between items-center hover:border-purple-500 transition-colors">
-                            <div className={`font-bold ${match.home === match.winner ? 'text-white' : 'text-zinc-500'}`}>{match.home}</div>
-                            <div className="bg-zinc-900 px-4 py-2 rounded-lg font-black text-purple-400 tracking-widest">
-                                {match.homeScore} - {match.awayScore}
-                            </div>
-                            <div className={`font-bold ${match.away === match.winner ? 'text-white' : 'text-zinc-500'}`}>{match.away}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-
-        const RankingsTab = ({ teams, onTeamClick }) => {
-            const [subTab, setSubTab] = useState('overall');
-
-            return (
-                <div className="animate-fade-in">
-                    <div className="flex gap-4 mb-8">
-                        {['overall', 'conference', 'player'].map(tab => (
-                            <button 
-                                key={tab}
-                                onClick={() => setSubTab(tab)} 
-                                className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider ${subTab === tab ? 'bg-purple-600 text-white' : 'bg-zinc-900 text-zinc-500'}`}
-                            >
-                                {tab}
-                            </button>
-                        ))}
-                    </div>
-
-                    {subTab === 'overall' && (
-                        <div className="bg-[#111] rounded-xl border border-zinc-800 overflow-hidden">
-                            <table className="w-full text-left text-sm">
-                                <thead className="bg-zinc-900 text-zinc-500 uppercase text-xs font-black">
-                                    <tr>
-                                        <th className="p-4">Rank</th>
-                                        <th className="p-4">Team</th>
-                                        <th className="p-4">Record</th>
-                                        <th className="p-4">SOS</th>
-                                        <th className="p-4">Mvmt</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {teams.map((team, i) => (
-                                        <tr key={i} onClick={() => onTeamClick(team)} className="border-t border-zinc-800 hover:bg-zinc-900/50 cursor-pointer transition-colors">
-                                            <td className="p-4 font-black">{team.rank}</td>
-                                            <td className="p-4 font-bold text-purple-400">{team.name}</td>
-                                            <td className="p-4">{team.record}</td>
-                                            <td className="p-4">{team.sos}</td>
-                                            <td className="p-4 font-bold">
-                                                {team.movement > 0 ? <span className="text-green-500">+{team.movement}</span> : team.movement < 0 ? <span className="text-red-500">{team.movement}</span> : <span className="text-zinc-600">-</span>}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
-
-                    {subTab === 'conference' && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {['SEC', 'GMC', 'Shore', 'Big North'].map(conf => {
-                                const confTeams = teams.filter(t => t.conference === conf).slice(0, 5);
-                                return (
-                                    <div key={conf} className="bg-[#111] p-6 rounded-xl border border-zinc-800">
-                                        <h3 className="text-xl font-black uppercase mb-4 text-purple-500">{conf}</h3>
-                                        <div className="space-y-3">
-                                            {confTeams.map((team, i) => (
-                                                <div key={i} onClick={() => onTeamClick(team)} className={`p-3 rounded-lg flex justify-between cursor-pointer ${i === 0 ? 'bg-zinc-900 gold-glow' : 'bg-zinc-900/40 hover:bg-zinc-800'}`}>
-                                                    <span className="font-bold">{team.name}</span>
-                                                    <span className="text-zinc-400 text-sm">{team.record}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    )}
-
-                    {subTab === 'player' && (
-                        <div className="p-10 text-center border border-dashed border-zinc-800 rounded-xl text-zinc-500 font-bold uppercase tracking-widest">
-                            Player DB Siphon Configured for Phase 2 Rollout.
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        const MatchesTab = ({ matches }) => (
-            <div className="animate-fade-in">
-                <h2 className="text-3xl font-black uppercase mb-6 border-b border-zinc-800 pb-2">Weekly Schedule</h2>
-                <div className="bg-[#111] p-6 rounded-xl border border-zinc-800">
-                    {matches.map((match, i) => (
-                        <div key={i} className="flex justify-between items-center py-4 border-b border-zinc-800/50 last:border-0">
-                            <div className="text-sm font-bold text-zinc-500 w-24">{match.date}</div>
-                            <div className="flex-1 flex justify-between px-8">
-                                <span className="font-bold">{match.home}</span>
-                                <span className="text-purple-500 font-black px-4">VS</span>
-                                <span className="font-bold">{match.away}</span>
-                            </div>
-                            <div className="w-24 text-right text-xs uppercase tracking-widest text-zinc-600 font-bold">Final</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-
-        // --- MAIN APP ---
-
-        function App() {
-            const [activeTab, setActiveTab] = useState('main');
-            const [data, setData] = useState({ teams: [], matches: [], lastUpdated: 'Loading...' });
-            const [selectedTeam, setSelectedTeam] = useState(null);
+        const App = () => {
+            const [tab, setTab] = useState('Main');
+            const [data, setData] = useState({ teams: [], matches: [], conferences: [] });
+            const [confTab, setConfTab] = useState('Shore');
 
             useEffect(() => {
-                // Fetch the siphoned payload
-                fetch('./data.json')
-                    .then(res => res.json())
-                    .then(json => setData(json))
-                    .catch(err => console.error("Data Siphon Error:", err));
+                fetch('./data.json').then(r => r.json()).then(setData);
             }, []);
 
             return (
-                <div className="min-h-screen flex flex-col">
-                    <header className="border-b border-zinc-900 bg-black sticky top-0 z-40">
-                        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="w-3 h-3 bg-purple-600 rounded-sm animate-pulse"></div>
-                                <span className="text-xl font-black tracking-tighter uppercase">NJVB<span className="text-purple-600">CARTEL</span></span>
-                            </div>
-                            <div className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
-                                Last Sync: {data.lastUpdated}
+                <div className="max-w-5xl mx-auto p-4 md:p-8">
+                    {/* NAV */}
+                    <nav className="flex gap-8 mb-12 border-b border-zinc-800 pb-4 justify-between items-center">
+                        <h1 className="text-2xl font-black italic text-purple-600">NJVB CARTEL</h1>
+                        <div className="flex gap-6 font-bold text-xs uppercase tracking-widest">
+                            {['Main', 'Rankings', 'Matches'].map(t => (
+                                <button key={t} onClick={() => setTab(t)} className={tab === t ? 'text-white border-b-2 border-purple-600' : 'text-zinc-500'}>{t}</button>
+                            ))}
+                        </div>
+                    </nav>
+
+                    {/* MAIN OVERVIEW */}
+                    {tab === 'Main' && (
+                        <div className="animate-in fade-in duration-500">
+                            <h2 className="text-sm font-black text-zinc-500 uppercase mb-4 tracking-tighter">Recent Heat</h2>
+                            <div className="flex gap-4 overflow-x-auto pb-6 hide-scroll">
+                                {data.matches.slice(0, 5).map((m, i) => (
+                                    <div key={i} className="min-w-[280px] card-grad border border-zinc-800 p-6 rounded-2xl">
+                                        <div className="flex justify-between items-center mb-4 text-[10px] font-black text-zinc-600 uppercase"><span>{m.date}</span> <span className="text-green-500">FINAL</span></div>
+                                        <div className="flex justify-between font-black text-lg"><span>{m.home}</span> <span className="text-purple-500">{m.score.split('-')[0]}</span></div>
+                                        <div className="flex justify-between font-black text-lg"><span>{m.away}</span> <span className="text-purple-500">{m.score.split('-')[1]}</span></div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </header>
+                    )}
 
-                    <div className="max-w-6xl mx-auto px-6 py-10 w-full flex-1 flex flex-col md:flex-row gap-10">
-                        <aside className="w-full md:w-64 flex flex-col gap-2">
-                            {['main', 'rankings', 'matches'].map(tab => (
-                                <button 
-                                    key={tab}
-                                    onClick={() => setActiveTab(tab)}
-                                    className={`text-left px-6 py-4 rounded-xl font-black uppercase tracking-widest text-sm transition-all ${activeTab === tab ? 'bg-purple-600 text-white' : 'text-zinc-500 hover:bg-zinc-900 hover:text-zinc-300'}`}
-                                >
-                                    {tab}
-                                </button>
+                    {/* RANKINGS SECTION */}
+                    {tab === 'Rankings' && (
+                        <div className="space-y-12">
+                            {/* OVERALL */}
+                            <section>
+                                <h3 className="text-4xl font-black uppercase italic mb-6">State Top 100</h3>
+                                <div className="bg-[#111] rounded-2xl border border-zinc-800 overflow-hidden">
+                                    <table className="w-full text-left text-xs">
+                                        <thead className="bg-zinc-900 text-zinc-500 font-black uppercase">
+                                            <tr><th className="p-4">#</th><th className="p-4">Team</th><th className="p-4">Record</th><th className="p-4">SOS</th><th className="p-4">Mvmt</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            {data.teams.map((t, i) => (
+                                                <tr key={i} className="border-t border-zinc-800 hover:bg-zinc-900 transition-colors cursor-pointer">
+                                                    <td className="p-4 font-black">{t.rank}</td>
+                                                    <td className="p-4 font-black text-purple-400">{t.name}</td>
+                                                    <td className="p-4">{t.record}</td>
+                                                    <td className="p-4 text-zinc-500 font-bold">{t.sos}</td>
+                                                    <td className={`p-4 font-black ${t.movement > 0 ? 'text-green-500' : 'text-red-500'}`}>{t.movement > 0 ? `▲${t.movement}` : t.movement < 0 ? `▼${Math.abs(t.movement)}` : '—'}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+
+                            {/* CONFERENCES */}
+                            <section>
+                                <h3 className="text-2xl font-black uppercase mb-6 text-zinc-400">Conference Standing</h3>
+                                <div className="flex gap-2 overflow-x-auto mb-6 hide-scroll">
+                                    {data.conferences.map(c => (
+                                        <button key={c} onClick={() => setConfTab(c)} className={`px-4 py-2 rounded-full text-[10px] font-black uppercase transition-all ${confTab === c ? 'bg-white text-black' : 'bg-zinc-900 text-zinc-500'}`}>{c}</button>
+                                    ))}
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {data.teams.filter(t => t.conference === confTab).map((t, i) => (
+                                        <div key={i} className={`p-6 rounded-2xl card-grad border border-zinc-800 ${i === 0 ? 'gold-glow' : ''}`}>
+                                            <div className="text-[10px] font-black text-zinc-600 mb-1">POS: {i + 1}</div>
+                                            <div className="text-xl font-black uppercase truncate">{t.name}</div>
+                                            <div className="text-sm font-bold text-purple-500 mt-2">{t.record}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                    )}
+
+                    {/* WEEKLY SCHEDULE */}
+                    {tab === 'Matches' && (
+                        <div className="grid gap-4">
+                            <h3 className="text-4xl font-black uppercase italic mb-6">Battle Calendar</h3>
+                            {data.matches.map((m, i) => (
+                                <div key={i} className="flex items-center justify-between p-6 bg-[#111] border border-zinc-800 rounded-2xl">
+                                    <div className="w-24 text-xs font-black text-zinc-500">{m.date}</div>
+                                    <div className="flex-1 flex justify-center gap-8 font-black uppercase text-sm">
+                                        <span>{m.home}</span>
+                                        <span className="text-purple-600 italic">@</span>
+                                        <span>{m.away}</span>
+                                    </div>
+                                    <div className="w-24 text-right text-[10px] font-black text-zinc-600 uppercase">League Play</div>
+                                </div>
                             ))}
-                        </aside>
-
-                        <main className="flex-1">
-                            {activeTab === 'main' && <MainTab matches={data.matches} />}
-                            {activeTab === 'rankings' && <RankingsTab teams={data.teams} onTeamClick={setSelectedTeam} />}
-                            {activeTab === 'matches' && <MatchesTab matches={data.matches} />}
-                        </main>
-                    </div>
-                    
-                    <TeamModal team={selectedTeam} onClose={() => setSelectedTeam(null)} />
+                        </div>
+                    )}
                 </div>
             );
-        }
+        };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
