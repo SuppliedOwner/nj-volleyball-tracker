@@ -1,10 +1,81 @@
 {
-  "teams": [],
-  "playerStats": {
-    "kills": [],
-    "aces": [],
-    "blocks": []
-  },
+  "teams": [
+    {
+      "name": "Monroe Township",
+      "record": "12-0-0",
+      "points": "25.67"
+    },
+    {
+      "name": "Old Bridge",
+      "record": "10-3-0",
+      "points": "19.43"
+    },
+    {
+      "name": "West Windsor-Plainsboro South",
+      "record": "11-1-0",
+      "points": "18.92"
+    },
+    {
+      "name": "Hillsborough",
+      "record": "6-2-0",
+      "points": "18.57"
+    },
+    {
+      "name": "Payne Tech",
+      "record": "10-0-0",
+      "points": "18.34"
+    },
+    {
+      "name": "Randolph",
+      "record": "11-1-0",
+      "points": "17.23"
+    },
+    {
+      "name": "St. John-Vianney",
+      "record": "8-0-0",
+      "points": "16.80"
+    },
+    {
+      "name": "Passaic",
+      "record": "8-0-0",
+      "points": "16.71"
+    },
+    {
+      "name": "Scotch Plains-Fanwood",
+      "record": "6-2-0",
+      "points": "16.20"
+    },
+    {
+      "name": "J.P. Stevens",
+      "record": "8-1-0",
+      "points": "16.12"
+    },
+    {
+      "name": "Egg Harbor Township",
+      "record": "8-0-0",
+      "points": "15.76"
+    },
+    {
+      "name": "Belleville",
+      "record": "7-1-0",
+      "points": "15.46"
+    },
+    {
+      "name": "Ramapo",
+      "record": "7-0-0",
+      "points": "15.37"
+    },
+    {
+      "name": "Westfield",
+      "record": "7-1-0",
+      "points": "15.24"
+    },
+    {
+      "name": "St. Joseph",
+      "record": "9-3-0",
+      "points": "15.09"
+    }
+  ],
   "matches": [],
-  "lastUpdated": "4/23/2026, 9:41:19 PM"
+  "lastUpdated": "4/23/2026, 10:30:42 PM"
 }
