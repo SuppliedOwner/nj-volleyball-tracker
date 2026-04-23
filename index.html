@@ -3,95 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJVB HUB | New Jersey Volleyball Intelligence</title>
+    <title>NJVB HUB | Elite NJ Volleyball</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0a0c10; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .gold-glow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.4); border: 1px solid #eab308; }
+        .modal-bg { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        // Destructure Hooks
-        const { useState, useMemo, useEffect } = React;
+        const { useState, useEffect } = React;
 
-        // Icons placeholder (Lucide works differently in CDN, we'll use a helper)
-        const Icon = ({ name, size = 16, className = "" }) => {
-            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        // --- COMPONENTS ---
+
+        const TeamModal = ({ team, onClose }) => {
+            if (!team) return null;
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center modal-bg p-4" onClick={onClose}>
+                    <div className="bg-[#111] border border-zinc-800 p-8 rounded-2xl w-full max-w-2xl" onClick={e => e.stopPropagation()}>
+                        <div className="flex justify-between items-start mb-6">
+                            <div>
+                                <h2 className="text-4xl font-black uppercase">{team.name}</h2>
+                                <p className="text-purple-500 font-bold tracking-widest text-sm mt-1">{team.conference} CONFERENCE | STATE RANK: #{team.rank}</p>
+                            </div>
+                            <button onClick={onClose} className="text-zinc-500 hover:text-white text-2xl">&times;</button>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="bg-[#1a1a1a] p-4 rounded-xl">
+                                <span className="text-zinc-500 text-xs font-bold uppercase">Record</span>
+                                <p className="text-2xl font-black">{team.record}</p>
+                            </div>
+                            <div className="bg-[#1a1a1a] p-4 rounded-xl">
+                                <span className="text-zinc-500 text-xs font-bold uppercase">SOS (Strength of Schedule)</span>
+                                <p className="text-2xl font-black">{team.sos || 'N/A'}</p>
+                            </div>
+                        </div>
+
+                        <div className="text-zinc-400 text-sm italic">
+                            *Roster & Schedule modules pending next siphoning cycle.*
+                        </div>
+                    </div>
+                </div>
+            );
         };
 
-        // --- DATA CONSTANTS FROM MESSAGE.TXT ---
-        const CONFERENCES = ['SEC', 'GMC', 'Shore', 'Skyland', 'Big North', 'HCIAL', 'NJAC'];
-        const STAT_CATEGORIES = ['Kills', 'Digs', 'Blocks', 'Aces', 'Assists'];
-        const TIME_FILTERS = ['Daily', 'Weekly', 'Season'];
-        const SHUFFLE_MESSAGES = [
-            "NJ's elite platform for strength-of-schedule analytics and real-time volleyball intelligence.",
-            "Track every set, kill, and block from High Point to Cape May in real-time.",
-            "The only ranking system built on advanced Strength of Schedule (SOS) algorithms.",
-            "Your central hub for Garden State volleyball news, rankings, and verified match reports."
-        ];
+        const MainTab = ({ matches }) => (
+            <div className="animate-fade-in">
+                <h2 className="text-3xl font-black uppercase mb-6 border-b border-zinc-800 pb-2">Recent Intelligence</h2>
+                <div className="grid gap-4">
+                    {matches.slice(0, 5).map((match, i) => (
+                        <div key={i} className="bg-[#111] border border-zinc-800 p-5 rounded-xl flex justify-between items-center hover:border-purple-500 transition-colors">
+                            <div className={`font-bold ${match.home === match.winner ? 'text-white' : 'text-zinc-500'}`}>{match.home}</div>
+                            <div className="bg-zinc-900 px-4 py-2 rounded-lg font-black text-purple-400 tracking-widest">
+                                {match.homeScore} - {match.awayScore}
+                            </div>
+                            <div className={`font-bold ${match.away === match.winner ? 'text-white' : 'text-zinc-500'}`}>{match.away}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
 
-        const INITIAL_TEAMS = [
-            { id: 't1', name: 'Old Bridge', mascot: 'Knights', color: '#3b82f6', logo: 'https://upload.wikimedia.org/wikipedia/en/3/3c/Old_Bridge_High_School_logo.png', record: '12-1', points: 950, conference: 'GMC', schedule: [], roster: [] },
-            { id: 't2', name: 'Southern Regional', mascot: 'Rams', color: '#ef4444', logo: 'https://pbs.twimg.com/profile_images/1169608152336343040/4W9jS_v-_400x400.jpg', record: '11-2', points: 920, conference: 'Shore', schedule: [], roster: [] }
-            // ... truncated for brevity, full logic below [cite: 9, 12, 14, 17]
-        ];
-
-        // --- APP COMPONENT ---
-        function App() {
-            const [activeTab, setActiveTab] = useState('home');
-            const [messageIndex, setMessageIndex] = useState(0);
-
-            useEffect(() => {
-                const interval = setInterval(() => {
-                    setMessageIndex((prev) => (prev + 1) % SHUFFLE_MESSAGES.length);
-                }, 4500);
-                return () => clearInterval(interval);
-            }, []);
-
-            useEffect(() => {
-                // Initialize Lucide icons after render
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
-            }, [activeTab]);
+        const RankingsTab = ({ teams, onTeamClick }) => {
+            const [subTab, setSubTab] = useState('overall');
 
             return (
-                <div className="min-h-screen bg-[#0a0c10] text-slate-200">
-                    <header className="sticky top-0 z-50 bg-[#0f1116]/90 backdrop-blur-md border-b border-white/5">
-                        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 bg-purple-500 rounded-full"></div>
-                                <span className="text-lg font-black tracking-tighter uppercase">NJVB<span className="text-purple-500">HUB</span></span>
+                <div className="animate-fade-in">
+                    <div className="flex gap-4 mb-8">
+                        {['overall', 'conference', 'player'].map(tab => (
+                            <button 
+                                key={tab}
+                                onClick={() => setSubTab(tab)} 
+                                className={`px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider ${subTab === tab ? 'bg-purple-600 text-white' : 'bg-zinc-900 text-zinc-500'}`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </div>
+
+                    {subTab === 'overall' && (
+                        <div className="bg-[#111] rounded-xl border border-zinc-800 overflow-hidden">
+                            <table className="w-full text-left text-sm">
+                                <thead className="bg-zinc-900 text-zinc-500 uppercase text-xs font-black">
+                                    <tr>
+                                        <th className="p-4">Rank</th>
+                                        <th className="p-4">Team</th>
+                                        <th className="p-4">Record</th>
+                                        <th className="p-4">SOS</th>
+                                        <th className="p-4">Mvmt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {teams.map((team, i) => (
+                                        <tr key={i} onClick={() => onTeamClick(team)} className="border-t border-zinc-800 hover:bg-zinc-900/50 cursor-pointer transition-colors">
+                                            <td className="p-4 font-black">{team.rank}</td>
+                                            <td className="p-4 font-bold text-purple-400">{team.name}</td>
+                                            <td className="p-4">{team.record}</td>
+                                            <td className="p-4">{team.sos}</td>
+                                            <td className="p-4 font-bold">
+                                                {team.movement > 0 ? <span className="text-green-500">+{team.movement}</span> : team.movement < 0 ? <span className="text-red-500">{team.movement}</span> : <span className="text-zinc-600">-</span>}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+
+                    {subTab === 'conference' && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {['SEC', 'GMC', 'Shore', 'Big North'].map(conf => {
+                                const confTeams = teams.filter(t => t.conference === conf).slice(0, 5);
+                                return (
+                                    <div key={conf} className="bg-[#111] p-6 rounded-xl border border-zinc-800">
+                                        <h3 className="text-xl font-black uppercase mb-4 text-purple-500">{conf}</h3>
+                                        <div className="space-y-3">
+                                            {confTeams.map((team, i) => (
+                                                <div key={i} onClick={() => onTeamClick(team)} className={`p-3 rounded-lg flex justify-between cursor-pointer ${i === 0 ? 'bg-zinc-900 gold-glow' : 'bg-zinc-900/40 hover:bg-zinc-800'}`}>
+                                                    <span className="font-bold">{team.name}</span>
+                                                    <span className="text-zinc-400 text-sm">{team.record}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    {subTab === 'player' && (
+                        <div className="p-10 text-center border border-dashed border-zinc-800 rounded-xl text-zinc-500 font-bold uppercase tracking-widest">
+                            Player DB Siphon Configured for Phase 2 Rollout.
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const MatchesTab = ({ matches }) => (
+            <div className="animate-fade-in">
+                <h2 className="text-3xl font-black uppercase mb-6 border-b border-zinc-800 pb-2">Weekly Schedule</h2>
+                <div className="bg-[#111] p-6 rounded-xl border border-zinc-800">
+                    {matches.map((match, i) => (
+                        <div key={i} className="flex justify-between items-center py-4 border-b border-zinc-800/50 last:border-0">
+                            <div className="text-sm font-bold text-zinc-500 w-24">{match.date}</div>
+                            <div className="flex-1 flex justify-between px-8">
+                                <span className="font-bold">{match.home}</span>
+                                <span className="text-purple-500 font-black px-4">VS</span>
+                                <span className="font-bold">{match.away}</span>
                             </div>
-                            <nav className="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                                <button onClick={() => setActiveTab('home')} className={activeTab === 'home' ? 'text-purple-500' : ''}>Home</button>
-                                <button onClick={() => setActiveTab('rankings')} className={activeTab === 'rankings' ? 'text-purple-500' : ''}>Rankings</button>
-                            </nav>
+                            <div className="w-24 text-right text-xs uppercase tracking-widest text-zinc-600 font-bold">Final</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        // --- MAIN APP ---
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('main');
+            const [data, setData] = useState({ teams: [], matches: [], lastUpdated: 'Loading...' });
+            const [selectedTeam, setSelectedTeam] = useState(null);
+
+            useEffect(() => {
+                // Fetch the siphoned payload
+                fetch('./data.json')
+                    .then(res => res.json())
+                    .then(json => setData(json))
+                    .catch(err => console.error("Data Siphon Error:", err));
+            }, []);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <header className="border-b border-zinc-900 bg-black sticky top-0 z-40">
+                        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-3 h-3 bg-purple-600 rounded-sm animate-pulse"></div>
+                                <span className="text-xl font-black tracking-tighter uppercase">NJVB<span className="text-purple-600">CARTEL</span></span>
+                            </div>
+                            <div className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
+                                Last Sync: {data.lastUpdated}
+                            </div>
                         </div>
                     </header>
 
-                    <main className="max-w-6xl mx-auto px-4 py-12">
-                        <section className="p-10 rounded-3xl border border-white/5 bg-gradient-to-br from-[#1a1525] to-[#0a0c10]">
-                            <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase italic leading-[0.9]">
-                                THE STATE <br/><span className="text-purple-500">POWER RANKINGS</span>
-                            </h1>
-                            <p className="text-slate-400 text-sm mb-8 max-w-md font-medium">
-                                {SHUFFLE_MESSAGES[messageIndex]}
-                            </p>
-                            <div className="flex gap-3">
-                                <button className="bg-purple-600 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest">Report Match</button>
-                            </div>
-                        </section>
-                    </main>
+                    <div className="max-w-6xl mx-auto px-6 py-10 w-full flex-1 flex flex-col md:flex-row gap-10">
+                        <aside className="w-full md:w-64 flex flex-col gap-2">
+                            {['main', 'rankings', 'matches'].map(tab => (
+                                <button 
+                                    key={tab}
+                                    onClick={() => setActiveTab(tab)}
+                                    className={`text-left px-6 py-4 rounded-xl font-black uppercase tracking-widest text-sm transition-all ${activeTab === tab ? 'bg-purple-600 text-white' : 'text-zinc-500 hover:bg-zinc-900 hover:text-zinc-300'}`}
+                                >
+                                    {tab}
+                                </button>
+                            ))}
+                        </aside>
+
+                        <main className="flex-1">
+                            {activeTab === 'main' && <MainTab matches={data.matches} />}
+                            {activeTab === 'rankings' && <RankingsTab teams={data.teams} onTeamClick={setSelectedTeam} />}
+                            {activeTab === 'matches' && <MatchesTab matches={data.matches} />}
+                        </main>
+                    </div>
+                    
+                    <TeamModal team={selectedTeam} onClose={() => setSelectedTeam(null)} />
                 </div>
             );
         }
