@@ -5,12 +5,14 @@ async function scrape() {
     console.log("||PAUSE...|| Initializing Siphon (PC Edition)...");
     
     try {
-const browser = await puppeteer.launch({ 
-            // This is the EXACT path for Windows
+        const browser = await puppeteer.launch({ 
+            // Standard Windows Chrome Path
             executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 
             headless: "new",
             args: ['--no-sandbox', '--disable-setuid-sandbox'] 
         });
+
+        const page = await browser.newPage();
 
         // 1. Get Rankings
         console.log("||PAUSE...|| Siphoning Rankings...");
