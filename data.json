@@ -5,71 +5,71 @@
       "name": "Monroe Township",
       "record": "12-0-0",
       "sos": 10.9,
-      "conference": "Tri-County",
-      "movement": 0
+      "conference": "NJAC",
+      "movement": -1
     },
     {
       "rank": 2,
       "name": "Old Bridge",
       "record": "10-3-0",
       "sos": 11.9,
-      "conference": "Big North",
-      "movement": 2
+      "conference": "Skyland",
+      "movement": 0
     },
     {
       "rank": 3,
       "name": "West Windsor-Plainsboro South",
       "record": "11-1-0",
       "sos": 6.1,
-      "conference": "Colonial",
-      "movement": 1
+      "conference": "GMC",
+      "movement": -1
     },
     {
       "rank": 4,
       "name": "Hillsborough",
       "record": "6-2-0",
       "sos": 11.6,
-      "conference": "Skyland",
-      "movement": -1
+      "conference": "SEC",
+      "movement": -2
     },
     {
       "rank": 5,
       "name": "Payne Tech",
       "record": "10-0-0",
       "sos": 3.2,
-      "conference": "Big North",
-      "movement": 0
+      "conference": "Colonial",
+      "movement": 2
     },
     {
       "rank": 6,
       "name": "Randolph",
       "record": "11-1-0",
       "sos": 4.3,
-      "conference": "SEC",
-      "movement": 0
+      "conference": "BCSL",
+      "movement": -1
     },
     {
       "rank": 7,
       "name": "St. John-Vianney",
       "record": "8-0-0",
       "sos": 1.7,
-      "conference": "Union",
-      "movement": 2
+      "conference": "Cape-Atlantic",
+      "movement": 0
     },
     {
       "rank": 8,
       "name": "Passaic",
       "record": "8-0-0",
       "sos": 2.2,
-      "conference": "Shore",
-      "movement": 2
+      "conference": "Olympic",
+      "movement": 0
     },
     {
       "rank": 9,
       "name": "Scotch Plains-Fanwood",
       "record": "6-2-0",
       "sos": 9.2,
-      "conference": "Olympic",
+      "conference": "SEC",
       "movement": 2
     },
     {
@@ -77,15 +77,15 @@
       "name": "J.P. Stevens",
       "record": "8-1-0",
       "sos": 4.9,
-      "conference": "Olympic",
-      "movement": 0
+      "conference": "Shore",
+      "movement": -1
     },
     {
       "rank": 11,
       "name": "Egg Harbor Township",
       "record": "8-0-0",
       "sos": 0.2,
-      "conference": "SEC",
+      "conference": "BCSL",
       "movement": -2
     },
     {
@@ -93,23 +93,23 @@
       "name": "Belleville",
       "record": "7-1-0",
       "sos": 4.3,
-      "conference": "Tri-County",
-      "movement": 2
+      "conference": "Union",
+      "movement": 1
     },
     {
       "rank": 13,
       "name": "Ramapo",
       "record": "7-0-0",
       "sos": -0.3,
-      "conference": "NJAC",
-      "movement": -2
+      "conference": "Union",
+      "movement": 0
     },
     {
       "rank": 14,
       "name": "Westfield",
       "record": "7-1-0",
       "sos": 5,
-      "conference": "Olympic",
+      "conference": "Cape-Atlantic",
       "movement": 0
     },
     {
@@ -117,47 +117,47 @@
       "name": "St. Joseph",
       "record": "9-3-0",
       "sos": 7.6,
-      "conference": "NJAC",
-      "movement": 1
+      "conference": "Tri-County",
+      "movement": 0
     },
     {
       "rank": 16,
       "name": "Pinelands Regional",
       "record": "7-1-0",
       "sos": 4.1,
-      "conference": "Olympic",
-      "movement": 0
+      "conference": "GMC",
+      "movement": -2
     },
     {
       "rank": 17,
       "name": "Bridgewater-Raritan",
       "record": "8-4-0",
       "sos": 10.4,
-      "conference": "Union",
-      "movement": 2
+      "conference": "Cape-Atlantic",
+      "movement": 1
     },
     {
       "rank": 18,
       "name": "Hoboken",
       "record": "8-1-0",
       "sos": 3.4,
-      "conference": "Big North",
-      "movement": 2
+      "conference": "Shore",
+      "movement": -2
     },
     {
       "rank": 19,
       "name": "Southern Regional",
       "record": "7-1-0",
       "sos": 1.8,
-      "conference": "Skyland",
-      "movement": -1
+      "conference": "Union",
+      "movement": 2
     },
     {
       "rank": 20,
       "name": "Bergen Catholic",
       "record": "9-1-0",
       "sos": 1.5,
-      "conference": "Colonial",
+      "conference": "Cape-Atlantic",
       "movement": 2
     },
     {
@@ -166,30 +166,30 @@
       "record": "8-0-0",
       "sos": -1.7,
       "conference": "Union",
-      "movement": 1
+      "movement": 0
     },
     {
       "rank": 22,
       "name": "Hackensack",
       "record": "8-1-0",
       "sos": 2.3,
-      "conference": "Tri-County",
-      "movement": 1
+      "conference": "SEC",
+      "movement": -1
     },
     {
       "rank": 23,
       "name": "Williamstown",
       "record": "5-1-0",
       "sos": 4.3,
-      "conference": "HCIAL",
-      "movement": -2
+      "conference": "Colonial",
+      "movement": 0
     },
     {
       "rank": 24,
       "name": "Elizabeth",
       "record": "7-2-0",
       "sos": 4.6,
-      "conference": "Cape-Atlantic",
+      "conference": "BCSL",
       "movement": 1
     },
     {
@@ -197,15 +197,15 @@
       "name": "P\nPiscataway",
       "record": "6-3-0",
       "sos": 7.1,
-      "conference": "BCSL",
-      "movement": 0
+      "conference": "Skyland",
+      "movement": 1
     },
     {
       "rank": 26,
       "name": "Kingsway",
       "record": "10-3-0",
       "sos": 3.4,
-      "conference": "Olympic",
+      "conference": "Union",
       "movement": -2
     },
     {
@@ -213,47 +213,47 @@
       "name": "St. Peter's Prep",
       "record": "8-3-0",
       "sos": 4.8,
-      "conference": "Skyland",
-      "movement": 0
+      "conference": "BCSL",
+      "movement": 1
     },
     {
       "rank": 28,
       "name": "P\nPassaic Arts & Science Charter",
       "record": "8-1-0",
       "sos": -0.4,
-      "conference": "HCIAL",
-      "movement": -2
+      "conference": "Olympic",
+      "movement": 0
     },
     {
       "rank": 29,
       "name": "W\nWest Caldwell Tech",
       "record": "5-2-0",
       "sos": 5.4,
-      "conference": "Olympic",
-      "movement": 1
+      "conference": "BCSL",
+      "movement": -2
     },
     {
       "rank": 30,
       "name": "H\nHowell",
       "record": "7-0-0",
       "sos": -4.8,
-      "conference": "GMC",
-      "movement": 0
+      "conference": "Cape-Atlantic",
+      "movement": -1
     },
     {
       "rank": 31,
       "name": "Kearny",
       "record": "5-2-0",
       "sos": 4.3,
-      "conference": "Olympic",
-      "movement": 2
+      "conference": "Union",
+      "movement": 1
     },
     {
       "rank": 32,
       "name": "Glen Ridge",
       "record": "7-1-0",
       "sos": -1.8,
-      "conference": "Olympic",
+      "conference": "Shore",
       "movement": -2
     },
     {
@@ -261,15 +261,15 @@
       "name": "E\nEdison",
       "record": "6-3-0",
       "sos": 5.6,
-      "conference": "Skyland",
-      "movement": -2
+      "conference": "Colonial",
+      "movement": -1
     },
     {
       "rank": 34,
       "name": "Freehold Boro",
       "record": "7-1-0",
       "sos": -1.4,
-      "conference": "Colonial",
+      "conference": "BCSL",
       "movement": -1
     },
     {
@@ -277,15 +277,15 @@
       "name": "B\nBarnegat",
       "record": "7-3-0",
       "sos": 3,
-      "conference": "Big North",
-      "movement": 1
+      "conference": "Olympic",
+      "movement": -2
     },
     {
       "rank": 36,
       "name": "Harrison",
       "record": "7-2-0",
       "sos": 0.8,
-      "conference": "Colonial",
+      "conference": "SEC",
       "movement": -2
     },
     {
@@ -293,15 +293,15 @@
       "name": "Sparta",
       "record": "8-2-0",
       "sos": -0.6,
-      "conference": "Olympic",
-      "movement": -1
+      "conference": "Big North",
+      "movement": -2
     },
     {
       "rank": 38,
       "name": "Lacey Township",
       "record": "6-3-0",
       "sos": 3.6,
-      "conference": "GMC",
+      "conference": "Skyland",
       "movement": 2
     },
     {
@@ -309,15 +309,15 @@
       "name": "Cherry Hill East",
       "record": "6-1-0",
       "sos": -2.6,
-      "conference": "Union",
-      "movement": -1
+      "conference": "Shore",
+      "movement": 1
     },
     {
       "rank": 40,
       "name": "Livingston",
       "record": "5-5-0",
       "sos": 8.7,
-      "conference": "GMC",
+      "conference": "Olympic",
       "movement": -1
     },
     {
@@ -325,79 +325,79 @@
       "name": "Millburn",
       "record": "6-3-0",
       "sos": 3.5,
-      "conference": "GMC",
-      "movement": -1
+      "conference": "Colonial",
+      "movement": 2
     },
     {
       "rank": 42,
       "name": "Cinnaminson",
       "record": "7-2-0",
       "sos": -0.2,
-      "conference": "Cape-Atlantic",
-      "movement": -2
+      "conference": "Union",
+      "movement": -1
     },
     {
       "rank": 43,
       "name": "Hudson Catholic",
       "record": "6-3-0",
       "sos": 3,
-      "conference": "Shore",
-      "movement": 2
+      "conference": "GMC",
+      "movement": -2
     },
     {
       "rank": 44,
       "name": "A\nArts",
       "record": "6-0-0",
       "sos": -7.2,
-      "conference": "Tri-County",
-      "movement": -2
+      "conference": "BCSL",
+      "movement": 0
     },
     {
       "rank": 45,
       "name": "Hopewell Valley Central",
       "record": "7-3-0",
       "sos": 0.8,
-      "conference": "NJAC",
-      "movement": 0
+      "conference": "HCIAL",
+      "movement": -1
     },
     {
       "rank": 46,
       "name": "Absegami",
       "record": "6-2-0",
       "sos": 0,
-      "conference": "Big North",
-      "movement": 1
+      "conference": "Skyland",
+      "movement": 2
     },
     {
       "rank": 47,
       "name": "Passaic County Tech",
       "record": "6-2-0",
       "sos": -0.4,
-      "conference": "SEC",
-      "movement": -1
+      "conference": "Union",
+      "movement": -2
     },
     {
       "rank": 48,
       "name": "Ridge",
       "record": "6-4-0",
       "sos": 3.8,
-      "conference": "Union",
-      "movement": -1
+      "conference": "Tri-County",
+      "movement": -2
     },
     {
       "rank": 49,
       "name": "Hunterdon Central",
       "record": "5-4-0",
       "sos": 4.9,
-      "conference": "NJAC",
-      "movement": 0
+      "conference": "Union",
+      "movement": -1
     },
     {
       "rank": 50,
       "name": "Gloucester County Tech",
       "record": "5-2-0",
       "sos": -0.1,
-      "conference": "Shore",
+      "conference": "Colonial",
       "movement": 2
     },
     {
@@ -405,48 +405,48 @@
       "name": "Rancocas Valley",
       "record": "3-2-0",
       "sos": 5,
-      "conference": "NJAC",
-      "movement": 0
+      "conference": "Tri-County",
+      "movement": 2
     },
     {
       "rank": 52,
       "name": "Union",
       "record": "6-5-0",
       "sos": 4.9,
-      "conference": "Tri-County",
-      "movement": 2
+      "conference": "Big North",
+      "movement": 0
     },
     {
       "rank": 53,
       "name": "Eastern",
       "record": "4-2-0",
       "sos": 1,
-      "conference": "GMC",
-      "movement": 2
+      "conference": "Olympic",
+      "movement": 0
     },
     {
       "rank": 54,
       "name": "Lyndhurst",
       "record": "6-3-0",
       "sos": 0,
-      "conference": "Shore",
-      "movement": -2
+      "conference": "Colonial",
+      "movement": 2
     },
     {
       "rank": 55,
       "name": "Christian Brothers Academy",
       "record": "5-1-0",
       "sos": -3.5,
-      "conference": "Big North",
-      "movement": 0
+      "conference": "SEC",
+      "movement": -1
     },
     {
       "rank": 56,
       "name": "West Orange",
       "record": "7-3-0",
       "sos": -1.9,
-      "conference": "Olympic",
-      "movement": 2
+      "conference": "Cape-Atlantic",
+      "movement": 1
     },
     {
       "rank": 57,
@@ -454,14 +454,14 @@
       "record": "5-2-0",
       "sos": -1.6,
       "conference": "GMC",
-      "movement": 2
+      "movement": -1
     },
     {
       "rank": 58,
       "name": "Burlington Township",
       "record": "6-4-0",
       "sos": 1.9,
-      "conference": "BCSL",
+      "conference": "Skyland",
       "movement": 0
     },
     {
@@ -469,8 +469,8 @@
       "name": "N\nNorthern Burlington",
       "record": "4-5-0",
       "sos": 6.9,
-      "conference": "SEC",
-      "movement": 0
+      "conference": "Colonial",
+      "movement": 1
     },
     {
       "rank": 60,
@@ -485,16 +485,16 @@
       "name": "Sterling",
       "record": "8-2-0",
       "sos": -5.1,
-      "conference": "Skyland",
-      "movement": -1
+      "conference": "Tri-County",
+      "movement": -2
     },
     {
       "rank": 62,
       "name": "Colonia",
       "record": "4-6-0",
       "sos": 9.5,
-      "conference": "Colonial",
-      "movement": -1
+      "conference": "SEC",
+      "movement": 0
     },
     {
       "rank": 63,
@@ -502,22 +502,22 @@
       "record": "4-4-0",
       "sos": 4.6,
       "conference": "NJAC",
-      "movement": 2
+      "movement": 1
     },
     {
       "rank": 64,
       "name": "B\nBergenfield",
       "record": "4-6-0",
       "sos": 8.1,
-      "conference": "Skyland",
-      "movement": 2
+      "conference": "Tri-County",
+      "movement": 0
     },
     {
       "rank": 65,
       "name": "East Side",
       "record": "3-3-0",
       "sos": 3.8,
-      "conference": "Union",
+      "conference": "Shore",
       "movement": 0
     },
     {
@@ -525,15 +525,15 @@
       "name": "Perth Amboy",
       "record": "5-1-0",
       "sos": -8.9,
-      "conference": "Olympic",
-      "movement": 1
+      "conference": "Shore",
+      "movement": 0
     },
     {
       "rank": 67,
       "name": "East Brunswick",
       "record": "3-6-0",
       "sos": 9.5,
-      "conference": "GMC",
+      "conference": "Skyland",
       "movement": -1
     },
     {
@@ -541,24 +541,24 @@
       "name": "Eastside",
       "record": "5-3-0",
       "sos": -0.9,
-      "conference": "Tri-County",
-      "movement": -2
+      "conference": "Shore",
+      "movement": -1
     },
     {
       "rank": 69,
       "name": "Pennsauken",
       "record": "5-4-0",
       "sos": 0.8,
-      "conference": "Skyland",
-      "movement": 0
+      "conference": "Cape-Atlantic",
+      "movement": -1
     },
     {
       "rank": 70,
       "name": "Central Regional",
       "record": "5-4-0",
       "sos": 2,
-      "conference": "Skyland",
-      "movement": -2
+      "conference": "NJAC",
+      "movement": 2
     },
     {
       "rank": 71,
@@ -566,46 +566,46 @@
       "record": "8-5-0",
       "sos": -0.2,
       "conference": "HCIAL",
-      "movement": -1
+      "movement": -2
     },
     {
       "rank": 72,
       "name": "Wayne Valley",
       "record": "4-3-0",
       "sos": 0.2,
-      "conference": "BCSL",
-      "movement": -1
+      "conference": "Tri-County",
+      "movement": 1
     },
     {
       "rank": 73,
       "name": "Orange",
       "record": "4-4-0",
       "sos": 3.8,
-      "conference": "Shore",
-      "movement": 1
+      "conference": "Cape-Atlantic",
+      "movement": 2
     },
     {
       "rank": 74,
       "name": "Chatham",
       "record": "6-6-0",
       "sos": 2.4,
-      "conference": "GMC",
-      "movement": 1
+      "conference": "BCSL",
+      "movement": -2
     },
     {
       "rank": 75,
       "name": "W\nWoodbridge",
       "record": "4-5-0",
       "sos": 4.3,
-      "conference": "Shore",
-      "movement": -1
+      "conference": "SEC",
+      "movement": -2
     },
     {
       "rank": 76,
       "name": "Union City",
       "record": "4-4-0",
       "sos": 2.3,
-      "conference": "Skyland",
+      "conference": "GMC",
       "movement": 2
     },
     {
@@ -613,56 +613,56 @@
       "name": "Holmdel",
       "record": "3-4-0",
       "sos": 4.4,
-      "conference": "Tri-County",
-      "movement": 2
+      "conference": "Colonial",
+      "movement": -2
     },
     {
       "rank": 78,
       "name": "Becton",
       "record": "4-4-0",
       "sos": 2.1,
-      "conference": "Shore",
-      "movement": 1
+      "conference": "Union",
+      "movement": 0
     },
     {
       "rank": 79,
       "name": "Dwight Morrow",
       "record": "4-4-0",
       "sos": 2,
-      "conference": "GMC",
-      "movement": -2
+      "conference": "Shore",
+      "movement": 0
     },
     {
       "rank": 80,
       "name": "Science Park",
       "record": "6-3-0",
       "sos": -3.9,
-      "conference": "BCSL",
-      "movement": -1
+      "conference": "HCIAL",
+      "movement": 2
     },
     {
       "rank": 81,
       "name": "Garfield",
       "record": "7-5-0",
       "sos": -1.8,
-      "conference": "HCIAL",
-      "movement": 1
+      "conference": "Skyland",
+      "movement": -2
     },
     {
       "rank": 82,
       "name": "Tech",
       "record": "6-3-0",
       "sos": -4.5,
-      "conference": "Olympic",
-      "movement": -2
+      "conference": "Cape-Atlantic",
+      "movement": 0
     },
     {
       "rank": 83,
       "name": "Bayonne",
       "record": "4-6-0",
       "sos": 4.2,
-      "conference": "SEC",
-      "movement": 1
+      "conference": "Skyland",
+      "movement": 0
     },
     {
       "rank": 84,
@@ -670,22 +670,22 @@
       "record": "4-2-0",
       "sos": -5,
       "conference": "HCIAL",
-      "movement": 1
+      "movement": -2
     },
     {
       "rank": 85,
       "name": "B\nBergen Tech",
       "record": "3-4-0",
       "sos": 3,
-      "conference": "Big North",
-      "movement": -2
+      "conference": "Shore",
+      "movement": 1
     },
     {
       "rank": 86,
       "name": "Manchester Township",
       "record": "6-4-0",
       "sos": -2.3,
-      "conference": "Olympic",
+      "conference": "Cape-Atlantic",
       "movement": 2
     },
     {
@@ -693,7 +693,7 @@
       "name": "Lenape",
       "record": "3-5-0",
       "sos": 5,
-      "conference": "Skyland",
+      "conference": "Big North",
       "movement": -1
     },
     {
@@ -701,7 +701,7 @@
       "name": "Lakeland Regional",
       "record": "4-4-0",
       "sos": 0.3,
-      "conference": "Big North",
+      "conference": "Cape-Atlantic",
       "movement": -1
     },
     {
@@ -709,15 +709,15 @@
       "name": "Bloomfield",
       "record": "2-5-0",
       "sos": 7,
-      "conference": "Big North",
-      "movement": -1
+      "conference": "BCSL",
+      "movement": 2
     },
     {
       "rank": 90,
       "name": "Cedar Creek",
       "record": "3-2-0",
       "sos": -3.8,
-      "conference": "Tri-County",
+      "conference": "Skyland",
       "movement": 2
     },
     {
@@ -725,15 +725,15 @@
       "name": "McNair Academic",
       "record": "4-5-0",
       "sos": 1.1,
-      "conference": "HCIAL",
-      "movement": -2
+      "conference": "NJAC",
+      "movement": 0
     },
     {
       "rank": 92,
       "name": "Linden",
       "record": "3-5-0",
       "sos": 3.4,
-      "conference": "SEC",
+      "conference": "Colonial",
       "movement": -1
     },
     {
@@ -741,15 +741,15 @@
       "name": "Hillside",
       "record": "3-3-0",
       "sos": -1.5,
-      "conference": "Skyland",
-      "movement": 2
+      "conference": "Olympic",
+      "movement": 1
     },
     {
       "rank": 94,
       "name": "St. Augustine Prep",
       "record": "3-3-0",
       "sos": -1.2,
-      "conference": "Skyland",
+      "conference": "Shore",
       "movement": -2
     },
     {
@@ -757,7 +757,7 @@
       "name": "Cherry Hill West",
       "record": "3-4-0",
       "sos": 2.3,
-      "conference": "Colonial",
+      "conference": "NJAC",
       "movement": 2
     },
     {
@@ -766,14 +766,14 @@
       "record": "4-6-0",
       "sos": 1.6,
       "conference": "BCSL",
-      "movement": 2
+      "movement": -2
     },
     {
       "rank": 97,
       "name": "Memorial",
       "record": "2-6-0",
       "sos": 7.2,
-      "conference": "Olympic",
+      "conference": "Big North",
       "movement": -2
     },
     {
@@ -781,24 +781,24 @@
       "name": "Newark Central",
       "record": "3-2-0",
       "sos": -3.9,
-      "conference": "Tri-County",
-      "movement": -2
+      "conference": "BCSL",
+      "movement": -1
     },
     {
       "rank": 99,
       "name": "Mount Olive",
       "record": "5-6-0",
       "sos": 0.8,
-      "conference": "Big North",
-      "movement": 2
+      "conference": "Shore",
+      "movement": 0
     },
     {
       "rank": 100,
       "name": "T\nTeaneck",
       "record": "2-4-0",
       "sos": 3.9,
-      "conference": "Tri-County",
-      "movement": 1
+      "conference": "Colonial",
+      "movement": 0
     }
   ],
   "matches": [],
@@ -817,5 +817,5 @@
     "Union",
     "Cape-Atlantic"
   ],
-  "lastUpdated": "2026-04-24T13:12:54.184Z"
+  "lastUpdated": "2026-04-24T15:04:38.714Z"
 }
